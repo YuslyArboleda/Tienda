@@ -18,8 +18,16 @@ import javax.swing.JTextField;
 public class ModeloUsuario {
 
     /* Creamos los atributos o variables  que necesita para realizar los procesos de base de datos*/
-    private int doc, sex, rol;
+    private int doc, sex, rol,tip;
     private String nom, dir, tel, cor, lo, cl;
+
+    public int getTip() {
+        return tip;
+    }
+
+    public void setTip(int tip) {
+        this.tip = tip;
+    }
     private Date fec;
 
     /*Creamos los getter y setter*/
@@ -129,24 +137,26 @@ public class ModeloUsuario {
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();//Instanciamos la conexion
         
-        String sql="Call ins_usuario(?,?,?,?,?,?,?,?,?,?)";//Consulta a realizar a la base de datos
+        String sql="Call ins_usuario(?,?,?,?,?,?,?,?,?,?,?)";//Consulta a realizar a la base de datos
         try {
             PreparedStatement ps= cn.prepareStatement(sql);
             ps.setInt(1,getDoc());
-            ps.setString(2, getNom());
-            ps.setString(3, getTel());
-            ps.setString(4, getCor());
-            ps.setString(5, getDir());
-            ps.setDate(6, getFec());
-            ps.setInt(7, getSex());
-            ps.setInt(8, getRol());
-            ps.setString(9, getLo());
-            ps.setString(10, getCl());
+            ps.setInt(2, getTip());
+            ps.setString(3, getNom());
+            ps.setString(4, getTel());
+            ps.setString(5, getCor());
+            ps.setString(6, getDir());
+            ps.setDate(7, getFec());
+            ps.setInt(8, getSex());
+            ps.setInt(9, getRol());
+            ps.setString(10, getLo());
+            ps.setString(11, getCl());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Almacenado");
             cn.close();
             
         } catch (SQLException ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al guardar", "Error", JOptionPane.ERROR_MESSAGE);
         }
         conect.cerrarConexion();

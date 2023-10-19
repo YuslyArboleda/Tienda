@@ -151,11 +151,9 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
         jpCliente.setToolTipText("");
 
         lblDocuPro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblDocuPro.setForeground(null);
         lblDocuPro.setText("Documento");
 
         txtDocPro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtDocPro.setForeground(null);
         txtDocPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDocProActionPerformed(evt);
@@ -163,11 +161,9 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
         });
 
         lblnomPro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblnomPro.setForeground(null);
         lblnomPro.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtNombre.setForeground(null);
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -175,14 +171,11 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
         });
 
         lblCorreo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblCorreo.setForeground(null);
         lblCorreo.setText("Correo");
 
         txtCorreo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtCorreo.setForeground(null);
 
         lblTelefono.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblTelefono.setForeground(null);
         lblTelefono.setText("Celular");
 
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -192,11 +185,9 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
         });
 
         lblDireccion.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblDireccion.setForeground(null);
         lblDireccion.setText("Direccion");
 
         txtDireccion.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtDireccion.setForeground(null);
 
         jLabel1.setForeground(java.awt.Color.red);
         jLabel1.setText("*");
@@ -214,28 +205,23 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
         jdFecha.setDateFormatString("yyyy-MM-dd");
 
         lblFecha.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblFecha.setForeground(null);
         lblFecha.setText("Fecha de Nacimiento");
 
         jcsexoPro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jcsexoPro.setForeground(null);
 
         jLabel11.setForeground(java.awt.Color.red);
         jLabel11.setText("*");
 
         lblSexo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblSexo.setForeground(null);
         lblSexo.setText("Género");
 
         jLabel9.setForeground(java.awt.Color.red);
         jLabel9.setText("*");
 
         lbltipo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lbltipo.setForeground(null);
         lbltipo.setText("Tipo de Documento");
 
         jcTipo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jcTipo.setForeground(null);
         jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Cedula de Ciudadania", "Cedula de Extranjeria", "Pasaporte", "Nit" }));
 
         javax.swing.GroupLayout jpClienteLayout = new javax.swing.GroupLayout(jpCliente);
@@ -257,12 +243,11 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
                             .addGroup(jpClienteLayout.createSequentialGroup()
                                 .addComponent(lbltipo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jpClienteLayout.createSequentialGroup()
-                                    .addComponent(lblSexo)
-                                    .addGap(212, 212, 212)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jpClienteLayout.createSequentialGroup()
                                     .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jpClienteLayout.createSequentialGroup()
@@ -271,24 +256,18 @@ public class Nuevo_Cliente extends javax.swing.JFrame {
                                                 .addComponent(lblDireccion)
                                                 .addComponent(lblTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGap(84, 84, 84)
+                                            .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(jpClienteLayout.createSequentialGroup()
-                                                    .addGap(254, 254, 254)
-                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jpClienteLayout.createSequentialGroup()
-                                                    .addGap(84, 84, 84)
                                                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(88, 88, 88)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(lblSexo)
+                                                    .addGap(18, 18, 18)
                                                     .addComponent(jcsexoPro, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jpClienteLayout.createSequentialGroup()
-                                                    .addGap(84, 84, 84)
-                                                    .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                                                        .addComponent(txtCorreo)))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpClienteLayout.createSequentialGroup()
-                                                    .addGap(84, 84, 84)
-                                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(txtDireccion)
+                                                .addComponent(txtCorreo)
+                                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(lblFecha))
                                     .addGap(38, 38, 38)
                                     .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
