@@ -34,7 +34,7 @@ public class ControladorProveedor implements ActionListener {
         nuevo.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
                 ControladorPrincipal pri = new ControladorPrincipal();
-                pri.iniciar();
+                pri.iniciar(0);
             }
         });
     }

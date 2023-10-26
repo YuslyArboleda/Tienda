@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.ModeloProveedor;
 import Modelo.ModeloUsuario;
 import Vista.Principal;
 import java.awt.Color;
@@ -10,6 +11,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class ControladorPrincipal implements ActionListener, ChangeListener {
 
@@ -23,12 +26,16 @@ public class ControladorPrincipal implements ActionListener, ChangeListener {
         prin.getJtPrincipal().addChangeListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar(int valor) {
         prin.setLocationRelativeTo(null);//Centra la ventana
         prin.setTitle("Principal");//Le da titulo a la ventana
         prin.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        if(valor!=0){
+            prin.getJtPrincipal().setSelectedIndex(valor);
+        }
         prin.setVisible(true);//Hace visible la ventana
         gestionPestanas();
+        
     }
     
     public void gestionPestanas(){
@@ -59,17 +66,57 @@ public class ControladorPrincipal implements ActionListener, ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         int seleccion= prin.getJtPrincipal().getSelectedIndex();
+        if(seleccion==0){
+            gestionPestanas();
+        }
         if(seleccion==1){
             ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
             modUsu.mostrarTablaUsuario(prin.getTbUsuario(), "");
             
             prin.getTxtBuscar().addMouseListener(new MouseAdapter(){
+                @Override
                 public void mouseClicked(MouseEvent e){
                     prin.getTxtBuscar().setText("");
                     prin.getTxtBuscar().setForeground(Color.BLACK);
                 }
             
             });
+            prin.getTxtBuscar().getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText());
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText());
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText());
+                }
+            });
+            prin.getTbUsuario().addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    int fila = prin.getTbUsuario().rowAtPoint(e.getPoint());
+                    int columna = prin.getTbUsuario().columnAtPoint(e.getPoint());
+                    modUsu.setDoc(Integer.parseInt(prin.getTbUsuario().getValueAt(fila, 1).toString()));
+                    
+                    System.out.println(fila);
+                    System.out.println(columna);
+                    if(columna==9){
+                        prin.setVisible(false);
+                        contUsua.actualizarUsuario(modUsu.getDoc());
+                    }
+                }
+            
+            });
+        }
+        if(seleccion==3){
+            ModeloProveedor modPro= new ModeloProveedor();
+            modPro.mostrarTablaProveedor(prin.getJtProveedor(), "");
         }
     }
 

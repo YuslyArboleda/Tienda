@@ -11,9 +11,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 public class ModeloProveedor {
 
@@ -162,6 +167,65 @@ public class ModeloProveedor {
             }
         }
         
+    }
+        public void mostrarTablaProveedor(JTable tabla, String valor) {
+        Conexion conect = new Conexion();
+        Connection cn = conect.iniciarConexion();
+       
+        //Personalizar Encabezado
+        JTableHeader encabezado = tabla.getTableHeader();
+        encabezado.setDefaultRenderer(new GestionEncabezado());
+        tabla.setTableHeader(encabezado);
+        
+        tabla.setDefaultRenderer(Object.class, new GestionCeldas());
+        
+
+        JButton editar = new JButton();
+        JButton eliminar = new JButton();
+
+        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
+       eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
+
+        String[] titulo = {"Tipo de Documento", "Documento", "Nombre" , "Tipo Persona", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "", ""};
+
+        DefaultTableModel tablaUsuario = new DefaultTableModel(null, titulo){
+            public boolean  isCellEditable(int row,int column){
+                return false;
+            }
+        };
+
+        String sqlProveedor;
+        if (valor.equals("")) {
+            sqlProveedor = " SELECT * FROM mostrar_proveedor ";
+        } else {
+            sqlProveedor = "call cons_proveedor('" + valor + "')";
+        }
+        try {
+            String[] dato = new String[titulo.length];
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sqlProveedor);
+            while (rs.next()) {
+                for (int i = 0; i < titulo.length - 2; i++) {
+                    dato[i] = rs.getString(i + 1);
+                }
+                tablaUsuario.addRow(new Object[]{dato[0],dato[1],dato[2],dato[6],dato[3],dato[4],dato[5],dato[7],dato[8],editar,eliminar});
+            }
+            cn.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        tabla.setModel(tablaUsuario);
+        //Darle tamaño a cada columna
+        int numColumnas = tabla.getColumnCount();
+        int[] tamanos={150,80,150,150,100,100,200,150,130,30,30};
+        for( int i= 0;i<numColumnas;i++){
+            TableColumn columna= tabla.getColumnModel().getColumn(i);
+            columna.setPreferredWidth(tamanos[i]);
+            
+        }
+        conect.cerrarConexion();
+
     }
 
 }

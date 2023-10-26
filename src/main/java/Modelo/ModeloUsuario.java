@@ -243,5 +243,39 @@ public class ModeloUsuario {
         conect.cerrarConexion();
 
     }
+    public void buscarUsuario(int valor){
+        Conexion cone= new Conexion();
+        Connection cn = cone.iniciarConexion();
+        String sql="call bus_usuario("+valor+")";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs= st.executeQuery(sql);
+            
+            while(rs.next()){
+                setDoc(rs.getInt(1));
+                setTip(rs.getInt(2));
+                setNom(rs.getString(3));
+                setTel(rs.getString(4));
+                setCor(rs.getString(5));
+                setDir(rs.getString(6));
+                setFec(rs.getDate(7));
+                setSex(rs.getInt(8));
+                setRol(rs.getInt(9));
+                setLo(rs.getString(10));
+                setCl(rs.getString(11));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public String obtenerSeleccion(Map<String,Integer>dato,int valor){
+        for(Map.Entry<String,Integer> seleccion:dato.entrySet()){
+            if(seleccion.getValue()==valor){
+                return seleccion.getKey();
+            }
+        }
+        return null;        
+    }
 
 }
