@@ -23,27 +23,27 @@ import javax.swing.border.Border;
  * @author HP
  */
 public class ControladorUsuario implements ActionListener {
-    
+
     Nuevo_Usuario nuevo = new Nuevo_Usuario();
     Principal prin = new Principal();
     ModeloUsuario usu = new ModeloUsuario();
-    
+
     public ControladorUsuario() {
         nuevo.getBtnGuardar().addActionListener(this);
         nuevo.getBtnMostrar().addActionListener(this);
         nuevo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Desactiva la x que cierrar el programa para que permita abrir o volver a la ventana principal
         nuevo.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
-                
+
                 ControladorPrincipal pri = new ControladorPrincipal();
                 pri.iniciar(1);
             }
         });
     }
-    
+
     public void control() {
         /*Al cerrar la ventana nuevo no cierra el programa sino que abre la ventana principal*/
-        
+
         prin.setVisible(false);//Cierra la ventana principal para a que solo se visualice la ventana de nuevo usuario
         nuevo.setLocationRelativeTo(null);//Centra la vista
         nuevo.setVisible(true);
@@ -66,9 +66,9 @@ public class ControladorUsuario implements ActionListener {
         for (String tipo : datoT.keySet()) {
             nuevo.getJcTipo().addItem(tipo);
         }
-        
+
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(nuevo.getBtnMostrar())) {
@@ -82,7 +82,7 @@ public class ControladorUsuario implements ActionListener {
                         getClass().getResource("/img/ojo.png")));
             }
         }
-        
+
         if (e.getSource().equals(nuevo.getBtnGuardar())) {
             if (nuevo.getTxtDocumento().getText().isEmpty() || nuevo.getTxtNombre().getText().isEmpty() || nuevo.getTxtCorreo().getText().isEmpty()
                     || nuevo.getTxtDireccion().getText().isEmpty() || nuevo.getTxtLogin().getText().isEmpty() || nuevo.getTxtTelefono().getText().isEmpty()
@@ -117,14 +117,22 @@ public class ControladorUsuario implements ActionListener {
                 usu.setLo(nuevo.getTxtLogin().getText());
                 usu.setCl(contrasena);
                 
-                usu.insertarUsuario();
-                usu.limpiar(nuevo.getJpusuario().getComponents());
+                if (nuevo.getBtnGuardar().getText().equals("Guardar")) {
+                    usu.insertarUsuario();
+                    usu.limpiar(nuevo.getJpusuario().getComponents());
+                }else{
+                    usu.actualizarUsuario();
+                    nuevo.setVisible(false);
+                    prin.getJtPrincipal().setSelectedIndex(1);
+                    usu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
+                }
+
             }
-            
+
         }
-        
+
     }
-    
+
     void actualizarUsuario(int doc) {
         usu.buscarUsuario(doc);
         nuevo.getTxtDocumento().setEnabled(false);
@@ -144,33 +152,33 @@ public class ControladorUsuario implements ActionListener {
             nuevo.getJcvsexo().addItem(sexo);
         }
 //        //Obtener el valor guardado en la base de datos
-        String valorSexo= usu.obtenerSeleccion(dato, usu.getSex());
+        String valorSexo = usu.obtenerSeleccion(dato, usu.getSex());
         nuevo.getJcvsexo().setSelectedItem(valorSexo);
 //        
         //Llenar el cargo
-        Map<String, Integer> datos =usu.llenarCombo("rol");
-        for(String rol : datos.keySet()){
+        Map<String, Integer> datos = usu.llenarCombo("rol");
+        for (String rol : datos.keySet()) {
             nuevo.getCbxCargo().addItem(rol);
         }
-        String valorRol= usu.obtenerSeleccion(datos, usu.getRol());
+        String valorRol = usu.obtenerSeleccion(datos, usu.getRol());
         nuevo.getCbxCargo().setSelectedItem(valorRol);
 //        
         Map<String, Integer> datoT = usu.llenarCombo("tipodoc");
         for (String tipo : datoT.keySet()) {
             nuevo.getJcTipo().addItem(tipo);
         }
-        String valorTipo= usu.obtenerSeleccion(datoT, usu.getTip());
+        String valorTipo = usu.obtenerSeleccion(datoT, usu.getTip());
         nuevo.getJcTipo().setSelectedItem(valorTipo);
 //        
-        Border borde= BorderFactory.createTitledBorder(null,"Actualizar Usuario",
-                javax.swing.border.TitledBorder.LEFT,javax.swing.border.TitledBorder.DEFAULT_POSITION, 
-                new java.awt.Font("Verdana",1,18), new java.awt.Color(153,0,153));
+        Border borde = BorderFactory.createTitledBorder(null, "Actualizar Usuario",
+                javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));
         nuevo.getJpusuario().setBorder(borde);
         prin.setVisible(false);
         nuevo.setLocationRelativeTo(null);
         nuevo.getBtnGuardar().setText("Actualizar");
         nuevo.setVisible(true);
-        
+
     }
-    
+
 }

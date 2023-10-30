@@ -72,6 +72,9 @@ public class ControladorPrincipal implements ActionListener, ChangeListener,Docu
             });
         
     }
+    void gestionCliente(){
+        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos

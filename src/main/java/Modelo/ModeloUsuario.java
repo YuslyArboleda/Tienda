@@ -143,7 +143,7 @@ public class ModeloUsuario {
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();//Instanciamos la conexion
 
-        String sql = "Call ins_usuario(?,?,?,?,?,?,?,?,?,?,?)";//Consulta a realizar a la base de datos
+        String sql = "Call usuario_ins(?,?,?,?,?,?,?,?,?,?,?)";//Consulta a realizar a la base de datos
         try {
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setInt(1, getDoc());
@@ -228,7 +228,7 @@ public class ModeloUsuario {
         if (valor.equals("")) {
             sqlUsuario = " SELECT * FROM mostrar_usuario ";
         } else {
-            sqlUsuario = "call cons_usuario('" + valor + "')";
+            sqlUsuario = "call usuario_cons('" + valor + "')";
         }
         try {
             String[] dato = new String[titulo.length];
@@ -240,9 +240,11 @@ public class ModeloUsuario {
                 }
                 Object[] fila={dato[0], dato[1], dato[2], dato[6], dato[3], dato[4], dato[5], dato[7], dato[8]};
                 if(nomPesta.equals("usuario")){
+                    fila= Arrays.copyOf(fila, fila.length+2);
                     fila[fila.length-2]=editar;
                     fila[fila.length-1]=eliminar;
                 }else{
+                    fila= Arrays.copyOf(fila, fila.length+1);
                     fila[fila.length-1]=agregar;
                 }
                 tablaUsuario.addRow(fila);
@@ -268,7 +270,7 @@ public class ModeloUsuario {
     public void buscarUsuario(int valor) {
         Conexion cone = new Conexion();
         Connection cn = cone.iniciarConexion();
-        String sql = "call bus_usuario(" + valor + ")";
+        String sql = "call usuario_bus(" + valor + ")";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -300,5 +302,28 @@ public class ModeloUsuario {
         }
         return null;
     }
+    public void actualizarUsuario(){
+        Conexion con = new Conexion();
+        Connection cn = con.iniciarConexion();
+        
+        String actUsuario= "call usuario_act(?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps= cn.prepareStatement(actUsuario);
+            ps.setInt(1, getDoc());            
+            ps.setString(2, getNom());
+            ps.setString(3, getTel());
+            ps.setString(4, getCor());
+            ps.setString(5, getDir());
+            ps.setDate(6, getFec());
+            ps.setInt(7, getSex());
+            ps.setInt(8, getRol());           
+            ps.setString(9, getCl());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro Almacenado");
+            cn.close();
+        } catch (SQLException e) {
+        }
+    }
+    
 
 }
