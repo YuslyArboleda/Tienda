@@ -181,5 +181,14 @@ public class ControladorUsuario implements ActionListener {
         nuevo.setVisible(true);
 
     }
+    void eliminarUsuario(int doc){
+        int resp= JOptionPane.showConfirmDialog(null, "¿Desea eliminar al usuario? \n" + doc
+                    , "Eliminar Usuario", JOptionPane.YES_OPTION);
+            if(resp==JOptionPane.YES_OPTION){
+                usu.setDoc(doc);
+                usu.eliminarUsuario();
+                            }
+            
+    }
 
 }

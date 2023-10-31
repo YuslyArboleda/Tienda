@@ -66,6 +66,8 @@ public class ControladorPrincipal implements ActionListener, ChangeListener,Docu
                         contUsua.actualizarUsuario(modUsu.getDoc());
                     }
                     if(columna ==10){
+                        contUsua.eliminarUsuario(modUsu.getDoc());
+                        modUsu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
                         
                     }
                 }

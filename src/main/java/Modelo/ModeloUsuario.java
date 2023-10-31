@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -201,7 +203,7 @@ public class ModeloUsuario {
         JButton agregar = new JButton();
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
         
         String[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
@@ -322,6 +324,22 @@ public class ModeloUsuario {
             JOptionPane.showMessageDialog(null, "Registro Almacenado");
             cn.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void eliminarUsuario(){
+        Conexion con = new Conexion();
+        Connection cn= con.iniciarConexion();
+        
+        String eliUsuario ="Call usuario_elim(?)";
+        try {
+            PreparedStatement ps = cn.prepareStatement(eliUsuario);
+            ps.setInt(1, getDoc());
+            ps.executeUpdate();
+            Icon eliminar = new ImageIcon(getClass().getResource("/img/eliminar(2).png"));
+            JOptionPane.showMessageDialog(null, "Registro Eliminado", "Eliminar Usuario", JOptionPane.PLAIN_MESSAGE, (Icon) eliminar);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
