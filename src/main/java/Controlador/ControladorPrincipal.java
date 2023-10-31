@@ -61,11 +61,12 @@ public class ControladorPrincipal implements ActionListener, ChangeListener,Docu
                     int columna = prin.getTbUsuario().columnAtPoint(e.getPoint());
                     modUsu.setDoc(Integer.parseInt(prin.getTbUsuario().getValueAt(fila, 1).toString()));
 
-                    System.out.println(fila);
-                    System.out.println(columna);
                     if (columna == 9) {
                         prin.setVisible(false);
                         contUsua.actualizarUsuario(modUsu.getDoc());
+                    }
+                    if(columna ==10){
+                        
                     }
                 }
 

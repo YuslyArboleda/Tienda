@@ -116,14 +116,15 @@ public class ControladorUsuario implements ActionListener {
                 usu.setRol(rol);
                 usu.setLo(nuevo.getTxtLogin().getText());
                 usu.setCl(contrasena);
-                
+
                 if (nuevo.getBtnGuardar().getText().equals("Guardar")) {
                     usu.insertarUsuario();
                     usu.limpiar(nuevo.getJpusuario().getComponents());
-                }else{
+                } else {
                     usu.actualizarUsuario();
                     nuevo.setVisible(false);
                     prin.getJtPrincipal().setSelectedIndex(1);
+                    prin.setVisible(true);
                     usu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
                 }
 
