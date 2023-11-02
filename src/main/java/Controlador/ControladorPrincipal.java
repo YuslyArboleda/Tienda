@@ -129,7 +129,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
             modProd.buscarImagen();
             File file= new File(modProd.getRuta());
             String archivo= file.getName();
-            prin.getTxtImaPro().setText(modProd.getRuta());
+            prin.getTxtImaPro().setText(archivo);
         }
     }
 
