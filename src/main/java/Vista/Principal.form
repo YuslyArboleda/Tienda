@@ -168,8 +168,8 @@
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNomProd" alignment="0" pref="282" max="32767" attributes="0"/>
-                              <Component id="txtImaPro" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNomProd" pref="282" max="32767" attributes="0"/>
+                              <Component id="txtImaPro" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -178,7 +178,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnImagen" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -204,7 +204,7 @@
                                   <Component id="lblImagen" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtImaPro" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnImagen" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
@@ -282,6 +282,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtImaPro">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="0"/>
                     </Property>
@@ -296,7 +297,7 @@
                     <Property name="text" type="java.lang.String" value="Guardar"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btnImagen">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/img/imagen (1).png"/>
@@ -327,7 +328,7 @@
                               <Component id="jScrollPane3" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="txtBuscarPro" min="-2" pref="327" max="-2" attributes="0"/>
+                                  <Component id="txtBuscarProd" min="-2" pref="327" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -338,7 +339,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBuscarPro" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBuscarProd" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane3" pref="443" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -354,7 +355,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable2">
+                    <Component class="javax.swing.JTable" name="tbProducto">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
@@ -363,7 +364,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="txtBuscarPro">
+                <Component class="javax.swing.JTextField" name="txtBuscarProd">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="0"/>
@@ -374,7 +375,7 @@
                     <Property name="text" type="java.lang.String" value="Buscar Producto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarProActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarProdActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -614,7 +615,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnNueCli" min="-2" pref="105" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="268" max="-2" attributes="0"/>
+                          <Component id="txtBuscarCli" min="-2" pref="268" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -625,7 +626,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnNueCli" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBuscarCli" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
@@ -633,9 +634,18 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="jTextField2">
+                <Component class="javax.swing.JTextField" name="txtBuscarCli">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Consutar Cliente"/>
+                  </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarCliActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnNueCli">
@@ -692,7 +702,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="tbCliente">
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -763,10 +773,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBuscarProveedor" min="-2" pref="451" max="-2" attributes="0"/>
-                          <EmptySpace pref="687" max="32767" attributes="0"/>
-                          <Component id="btnNuevoProveedor" min="-2" pref="102" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="txtBuscarProv" min="-2" pref="451" max="-2" attributes="0"/>
+                          <EmptySpace pref="744" max="32767" attributes="0"/>
+                          <Component id="btnNuevoProv" min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -775,8 +785,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnNuevoProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtBuscarProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNuevoProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBuscarProv" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -784,7 +794,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnNuevoProveedor">
+                <Component class="javax.swing.JButton" name="btnNuevoProv">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="0"/>
@@ -799,7 +809,7 @@
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtBuscarProveedor">
+                <Component class="javax.swing.JTextField" name="txtBuscarProv">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="0"/>
@@ -849,7 +859,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jtProveedor">
+                    <Component class="javax.swing.JTable" name="tbProveedor">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
@@ -952,8 +962,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFactUsu" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFactProv" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -963,7 +973,7 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbTipoPago" min="-2" pref="282" max="-2" attributes="0"/>
+                                  <Component id="cbFact_TipoP" min="-2" pref="282" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -984,7 +994,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblProveedor1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbTipoPago" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbFact_TipoP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -994,7 +1004,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnUsuario" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="btnFactUsu" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="txtusuario" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblUsuario" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1002,7 +1012,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="txtproveedor" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btnProveedor" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="btnFactProv" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="lblProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1056,7 +1066,7 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnUsuario">
+                <Component class="javax.swing.JButton" name="btnFactUsu">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/img/lupa.png"/>
@@ -1065,7 +1075,7 @@
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnProveedor">
+                <Component class="javax.swing.JButton" name="btnFactProv">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/img/lupa.png"/>
@@ -1086,7 +1096,7 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbTipoPago">
+                <Component class="javax.swing.JComboBox" name="cbFact_TipoP">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="6">
@@ -1149,7 +1159,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="txtBuscarFactCompra" min="-2" pref="303" max="-2" attributes="0"/>
+                                  <Component id="txtBuscarCompra" min="-2" pref="303" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane5" max="32767" attributes="0"/>
                           </Group>
@@ -1161,7 +1171,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBuscarFactCompra" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBuscarCompra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" pref="451" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1170,7 +1180,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="txtBuscarFactCompra">
+                <Component class="javax.swing.JTextField" name="txtBuscarCompra">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -1185,7 +1195,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable4">
+                    <Component class="javax.swing.JTable" name="tbFactura">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
@@ -1271,7 +1281,7 @@
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" pref="224" max="-2" attributes="0"/>
+                          <Component id="Venta_tipo_p" min="-2" pref="224" max="-2" attributes="0"/>
                           <EmptySpace pref="73" max="32767" attributes="0"/>
                           <Component id="btnGuardarVenta" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -1292,7 +1302,7 @@
                               </Group>
                               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Venta_tipo_p" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnGuardarVenta" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnBusVentaCliente" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -1368,7 +1378,7 @@
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="Venta_tipo_p">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -1431,7 +1441,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jtVenta">
+                    <Component class="javax.swing.JTable" name="tbVenta">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Verdana" size="12" style="0"/>

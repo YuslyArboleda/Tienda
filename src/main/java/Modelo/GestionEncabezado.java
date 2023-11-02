@@ -24,7 +24,7 @@ public class GestionEncabezado implements TableCellRenderer{
         JComponent encabezado = null;
         encabezado = new JLabel((String)value);
         
-        ((JLabel)encabezado).setHorizontalAlignment(SwingConstants.CENTER);
+        ((JLabel)encabezado).setHorizontalAlignment(SwingConstants.CENTER);//centrar los titulos de los encabezados
         Object  cellValue = value;
         encabezado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(153,0,153)));
         encabezado.setForeground(new java.awt.Color(153,0,153));

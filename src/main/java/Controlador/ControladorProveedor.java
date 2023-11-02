@@ -5,9 +5,7 @@
 package Controlador;
 
 import Modelo.ModeloProveedor;
-import Modelo.ModeloUsuario;
 import Vista.Nuevo_Proveedor;
-import Vista.Nuevo_Usuario;
 import Vista.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +24,7 @@ public class ControladorProveedor implements ActionListener {
 
     Nuevo_Proveedor nuevo = new Nuevo_Proveedor();
     Principal prin = new Principal();
-    ModeloProveedor usu = new ModeloProveedor();
+    ModeloProveedor pro = new ModeloProveedor();
 
     public ControladorProveedor() {
         nuevo.getBtnGuardar().addActionListener(this);
@@ -34,7 +32,7 @@ public class ControladorProveedor implements ActionListener {
         nuevo.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
                 ControladorPrincipal pri = new ControladorPrincipal();
-                pri.iniciar(0);
+                pri.iniciar(3);
             }
         });
     }
@@ -48,7 +46,7 @@ public class ControladorProveedor implements ActionListener {
 
         //Lleno el combobox de sexo
         nuevo.getJcsexoPro().addItem("Seleccione...");
-        Map<String, Integer> dato = usu.llenarCombo();
+        Map<String, Integer> dato = pro.llenarCombo();
         for (String sexo : dato.keySet()) {
             nuevo.getJcsexoPro().addItem(sexo);
         }
@@ -66,29 +64,26 @@ public class ControladorProveedor implements ActionListener {
             } else {
                 //Combobox
                 String valorSexo = nuevo.getJcsexoPro().getSelectedItem().toString();//
-                int sexo = usu.llenarCombo().get(valorSexo);
+                int sexo = pro.llenarCombo().get(valorSexo);
                 
                 //Seleccion de fecha, Cambiando al formato de fecha que entiende sql
                 java.util.Date fec = nuevo.getJdFecha().getDate();
                 long fe = fec.getTime();
                 java.sql.Date fecha = new Date(fe);
 
-                //Contraseña
+                pro.setDoc(Integer.parseInt(nuevo.getTxtDocPro().getText()));
+                pro.setNom(nuevo.getTxtNombre().getText());
+                pro.setFec(fecha);
+                pro.setTel(nuevo.getTxtTelefono().getText());
+                pro.setCor(nuevo.getTxtCorreo().getText());
+                pro.setDir(nuevo.getTxtDireccion().getText());
+                pro.setSex(sexo);
+                pro.setNit(nuevo.getJcTipo().getSelectedItem().toString());
+                pro.setPer(Integer.parseInt(nuevo.getJcPersona().getSelectedItem().toString()));
                
 
-                usu.setDoc(Integer.parseInt(nuevo.getTxtDocPro().getText()));
-                usu.setNom(nuevo.getTxtNombre().getText());
-                usu.setFec(fecha);
-                usu.setTel(nuevo.getTxtTelefono().getText());
-                usu.setCor(nuevo.getTxtCorreo().getText());
-                usu.setDir(nuevo.getTxtDireccion().getText());
-                usu.setSex(sexo);
-                usu.setNit(nuevo.getJcTipo().getSelectedItem().toString());
-                usu.setPers(nuevo.getJcPersona().getSelectedItem().toString());
-               
-
-                usu.insertarUsuario();
-                usu.limpiar(nuevo.getJpproveedor().getComponents());
+                pro.insertarProveedor();
+                pro.limpiar(nuevo.getJpproveedor().getComponents());
             }
 
         }

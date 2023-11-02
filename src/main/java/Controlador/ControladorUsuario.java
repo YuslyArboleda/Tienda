@@ -44,7 +44,6 @@ public class ControladorUsuario implements ActionListener {
     public void control() {
         /*Al cerrar la ventana nuevo no cierra el programa sino que abre la ventana principal*/
 
-        prin.setVisible(false);//Cierra la ventana principal para a que solo se visualice la ventana de nuevo usuario
         nuevo.setLocationRelativeTo(null);//Centra la vista
         nuevo.setVisible(true);
 

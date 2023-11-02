@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -49,6 +50,9 @@ public class ModeloProducto {
     
     public void buscarImagen(){
         JFileChooser archivos = new JFileChooser();
+        String rutacarpeta= getClass().getClassLoader().getResource("producto").getPath();
+        File carpeta= new File(rutacarpeta);
+        archivos.setCurrentDirectory(carpeta);
         FileNameExtensionFilter filtro = new FileNameExtensionFilter(
         "JPG,PNG & GIF","jpg","png","gif");
         archivos.setFileFilter(filtro);

@@ -28,6 +28,7 @@ public class ModeloUsuario {
     /* Creamos los atributos o variables  que necesita para realizar los procesos de base de datos*/
     private int doc, sex, rol, tip;
     private String nom, dir, tel, cor, lo, cl;
+    private Date fec;
 
     public int getTip() {
         return tip;
@@ -36,8 +37,6 @@ public class ModeloUsuario {
     public void setTip(int tip) {
         this.tip = tip;
     }
-    private Date fec;
-
     /*Creamos los getter y setter*/
     public int getDoc() {
         return doc;
@@ -169,7 +168,6 @@ public class ModeloUsuario {
         } finally {
             conect.cerrarConexion();
         }
-
     }
 
     public void limpiar(Component[] panel) {
@@ -203,11 +201,11 @@ public class ModeloUsuario {
         JButton agregar = new JButton();
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png")));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
         
         String[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
-        int total = titulo.length;
+        int total = titulo.length;//Para gardar el tamaño del cector titulo original
         
         if(nomPesta.equals("usuario")){
             
@@ -259,7 +257,20 @@ public class ModeloUsuario {
         tabla.setModel(tablaUsuario);
         //Darle tamaño a cada columna
         int numColumnas = tabla.getColumnCount();
-        int[] tamanos = {150, 80, 150, 150, 100, 100, 200, 150, 130, 30, 30};
+        int[] tamanos = {150, 100, 180, 150, 100, 100, 200, 150,100};
+
+        if (nomPesta.equals("usuario")) {
+            tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
+            tamanos[tamanos.length - 2] = 20;
+            tamanos[tamanos.length - 1] = 20;
+        } else {
+            tamanos = Arrays.copyOf(tamanos, tamanos.length + 1);
+            tamanos[tamanos.length - 1] = 20;
+        }
+        for (int i = 0; i < numColumnas; i++) {
+            TableColumn columna = tabla.getColumnModel().getColumn(i);
+            columna.setPreferredWidth(tamanos[i]);
+        }
         for (int i = 0; i < numColumnas; i++) {
             TableColumn columna = tabla.getColumnModel().getColumn(i);
             columna.setPreferredWidth(tamanos[i]);
