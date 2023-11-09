@@ -185,6 +185,24 @@ public class ModeloUsuario {
 
     }
 
+    public void agregarBoton(String nomPesta, String[]objeto, Object valor,Object valor2,Object valor3){
+       
+        if(nomPesta.equals("usuario")){
+            System.out.println(nomPesta);
+            
+            objeto= Arrays.copyOf(objeto,objeto.length+2);
+            
+            objeto[objeto.length-2]=String.valueOf(valor);
+            objeto[objeto.length-1]=String.valueOf(valor2);
+            System.out.println(objeto.length);
+            
+        }else{
+            objeto= Arrays.copyOf(objeto,objeto.length+1);
+            objeto[objeto.length-1]=String.valueOf(valor3);
+        }       
+        
+    }
+
     public void mostrarTablaUsuario(JTable tabla, String valor, String nomPesta) {
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();
@@ -206,7 +224,7 @@ public class ModeloUsuario {
         
         String[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
         int total = titulo.length;//Para gardar el tamaño del cector titulo original
-        
+//        agregarBoton(nomPesta, titulo, "", "", "");
         if(nomPesta.equals("usuario")){
             
             titulo= Arrays.copyOf(titulo,titulo.length+2);

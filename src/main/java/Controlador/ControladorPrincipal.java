@@ -23,25 +23,26 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 //    Nuevo_Usuario nuevo = new Nuevo_Usuario();//Instanca (Llama) la ventana(vista) Nuevo usuario
     ControladorUsuario contUsua = new ControladorUsuario();
     ControladorCliente contCli = new ControladorCliente();
-    ControladorProveedor contProv= new ControladorProveedor();
+    ControladorProveedor contProv = new ControladorProveedor();
+
     ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
     ModeloProveedor modProv = new ModeloProveedor();
     ModeloCliente modCli = new ModeloCliente();
-    ModeloProducto modProd= new ModeloProducto();
+    ModeloProducto modProd = new ModeloProducto();
 
     public ControladorPrincipal() {
         prin.getBtnNuevo().addActionListener(this);//Agrega el boton nuevo para que se escuche cuando se de clic
         prin.getBtnNueCli().addActionListener(this);
         prin.getBtnNuevoProv().addActionListener(this);
         prin.getBtnImagen().addActionListener(this);
-        
+        prin.getBtnGuardarPro().addActionListener(this);
+
         prin.getJtPrincipal().addChangeListener(this);
-        
+
         prin.getTxtBuscar().getDocument().addDocumentListener(this);
         prin.getTxtBuscarCli().getDocument().addDocumentListener(this);
         prin.getTxtBuscarProv().getDocument().addDocumentListener(this);
-        
-        
+
     }
 
     public void iniciar(int valor) {
@@ -110,6 +111,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), "", "proveedor");
     }
 
+  
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos
         if (e.getSource().equals(prin.getBtnNuevo())) {//Se crea al acción cuando le damos clic en el boton nuevo de la vista princial
@@ -125,12 +127,21 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         if (e.getSource().equals(prin.getBtnNuevoProv())) {
 
         }
-        if(e.getSource().equals(prin.getBtnImagen())){
+        if (e.getSource().equals(prin.getBtnImagen())) {
             modProd.buscarImagen();
-            File file= new File(modProd.getRuta());
-            String archivo= file.getName();
+            File file = new File(modProd.getRuta());
+            String archivo = file.getName();
             prin.getTxtImaPro().setText(archivo);
         }
+        if (e.getSource().equals(prin.getBtnGuardarPro())) {
+            modProd.setNom(prin.getTxtNomProd().getText());
+            modProd.setDes(prin.getTxaDescPro().getText());
+            modProd.setImagen(modProd.obtnerImagen(modProd.getRuta()));
+            modProd.insertarProducto();
+            modProd.limpiar(prin.getJpNuevoProducto().getComponents());
+
+        }
+
     }
 
     @Override

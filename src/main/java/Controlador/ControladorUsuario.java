@@ -122,15 +122,10 @@ public class ControladorUsuario implements ActionListener {
                 } else {
                     usu.actualizarUsuario();
                     nuevo.setVisible(false);
-                    prin.getJtPrincipal().setSelectedIndex(1);
-                    prin.setVisible(true);
-                    usu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
+                    nuevo.dispose();
                 }
-
             }
-
         }
-
     }
 
     void actualizarUsuario(int doc) {
@@ -178,16 +173,15 @@ public class ControladorUsuario implements ActionListener {
         nuevo.setLocationRelativeTo(null);
         nuevo.getBtnGuardar().setText("Actualizar");
         nuevo.setVisible(true);
-
     }
-    void eliminarUsuario(int doc){
-        int resp= JOptionPane.showConfirmDialog(null, "¿Desea eliminar al usuario? \n" + doc
-                    , "Eliminar Usuario", JOptionPane.YES_OPTION);
-            if(resp==JOptionPane.YES_OPTION){
-                usu.setDoc(doc);
-                usu.eliminarUsuario();
-                            }
-            
+
+    void eliminarUsuario(int doc) {
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al usuario? \n" + doc,
+                "Eliminar Usuario", JOptionPane.YES_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            usu.setDoc(doc);
+            usu.eliminarUsuario();
+        }
     }
 
 }
