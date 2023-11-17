@@ -5,9 +5,7 @@
 package Modelo;
 
 import Controlador.Conexion;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -22,7 +20,6 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,12 +30,23 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author HP
  */
 public class ModeloProducto {
+
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     private String nom, des, ruta;
     private byte imagen[];
@@ -186,28 +194,76 @@ public class ModeloProducto {
             ResultSet rs = st.executeQuery(sqlProducto);
 
             while (rs.next()) {
+                dato[0] = rs.getString(1);
                 try {
-                    byte[] imag= rs.getBytes(2);
-                    BufferedImage bfImag= null;
+                    byte[] imag = rs.getBytes(2);
+                    BufferedImage bfImag = null;
                     InputStream inStr = new ByteArrayInputStream(imag);
                     bfImag = ImageIO.read(inStr);
-                    ImageIcon imagen = new ImageIcon(bfImag.getScaledInstance(64, 64, 0));
-                    dato[1]= new JLabel(imagen);
-
+                    ImageIcon imagen = new ImageIcon(bfImag.getScaledInstance(60, 60, 0));
+                    dato[1] = new JLabel(imagen);
                 } catch (Exception e) {
-                    dato[1]= new JLabel("No Imagenes");
+                    dato[1] = new JLabel("No Imagenes");
                 }
-                dato[0]= rs.getString(1);
-                dato[2]= rs.getString(3);
-                dato[3]= rs.getString(4);
-                dato[4]= rs.getString(5);
-                dato[5]= rs.getInt(6);
-                
 
+                dato[2] = rs.getString(3);
+                dato[3] = rs.getString(4);
+                dato[4] = rs.getInt(5);
+                dato[5] = rs.getInt(6);
+
+                Object[] fila = {dato[0], dato[1], dato[2], dato[3], dato[4], dato[5]};
+                if (nomPesta.equals("producto")) {
+                    fila = Arrays.copyOf(fila, fila.length + 2);
+                    fila[fila.length - 2] = editar;
+                    fila[fila.length - 1] = eliminar;
+                } else {
+                    fila = Arrays.copyOf(fila, fila.length + 1);
+                    fila[fila.length - 1] = agregar;
+                }
+                tablaProducto.addRow(fila);
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+        tabla.setModel(tablaProducto);
+        //Darle tamaño a cada columna
+        int numColumnas = tabla.getColumnCount();
+        int[] tamanos = {50, 300, 250, 300, 100, 100};
+
+        if (nomPesta.equals("producto")) {
+            tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
+            tamanos[tamanos.length - 2] = 15;
+            tamanos[tamanos.length - 1] = 15;
+        } else {
+            tamanos = Arrays.copyOf(tamanos, tamanos.length + 1);
+            tamanos[tamanos.length - 1] = 15;
+        }
+        for (int i = 0; i < numColumnas; i++) {
+            TableColumn columna = tabla.getColumnModel().getColumn(i);
+            columna.setPreferredWidth(tamanos[i]);
+        }
+        conect.cerrarConexion();
+    }
+
+    public void buscarProducto(int id) {
+        Conexion cone = new Conexion();
+        Connection cn = cone.iniciarConexion();
+        String sql = "call producto_bus(" + id + ")";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            if (rs.next()) {
+                
+                setNom(rs.getString(2));
+                setDes(rs.getString(3));
+                setRuta(rs.getString(4));
+            }
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

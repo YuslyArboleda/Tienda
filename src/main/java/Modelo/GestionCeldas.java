@@ -4,7 +4,9 @@
  */
 package Modelo;
 
+import java.awt.Color;
 import java.awt.Component;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -31,6 +33,8 @@ public class GestionCeldas extends DefaultTableCellRenderer {
             JLabel lbl = (JLabel)value;
             lbl.setFont(new java.awt.Font("Verdana",1,12));
             lbl.setForeground(new java.awt.Color(0,0,1));
+            table.setRowHeight(50);
+            table.getColumnModel().getColumn(column).setPreferredWidth(50);
             return lbl;
         }
 

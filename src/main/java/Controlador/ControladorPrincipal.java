@@ -11,7 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -24,6 +27,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     ControladorUsuario contUsua = new ControladorUsuario();
     ControladorCliente contCli = new ControladorCliente();
     ControladorProveedor contProv = new ControladorProveedor();
+    ControladorProducto contProd = new ControladorProducto();
 
     ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
     ModeloProveedor modProv = new ModeloProveedor();
@@ -51,8 +55,72 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         prin.setExtendedState(JFrame.MAXIMIZED_BOTH);
         prin.getJtPrincipal().setSelectedIndex(valor);
         prin.setVisible(true);//Hace visible la ventana
-//        gestionPestanas();
+        gestionProducto();
 
+    }
+
+//    public Border titulo(String tit) {
+//        Border borde = BorderFactory.createTitledBorder(null, tit,
+//                javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+//                new java.awt.Font("Verdana", 1, 12), new java.awt.Color(153, 0, 153));
+//        return borde;
+//    }
+
+    public void gestionProducto() {
+        modProd.mostrarTablaProducto(prin.getTbProducto(), "", "producto");
+        prin.getTxtBuscarProd().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                prin.getTxtBuscarProd().setText("");
+                prin.getTxtBuscarProd().setForeground(Color.BLACK);
+            }
+        });
+        prin.getTbProducto().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+
+                int fila = prin.getTbProducto().rowAtPoint(e.getPoint());
+                int columna = prin.getTbProducto().columnAtPoint(e.getPoint());
+                modProd.setId(Integer.parseInt(prin.getTbProducto().getValueAt(fila, 0).toString()));
+
+                if (columna == 6) {
+                    contProd.buscarProducto(modProd.getId());
+//                    modProd.buscarProducto(modProd.getId());
+//
+//                    prin.getTxtNomProd().setText(modProd.getNom());
+//                    prin.getTxaDescPro().setText(modProd.getDes());
+//                    File file = new File(modProd.getRuta());
+//                    String archivo = file.getName();
+//                    prin.getTxtImaPro().setText(archivo);
+////                    prin.getJpNuevoProducto().setBorder(titulo("Actualizar Producto"));
+//                    prin.getJpNuevoProducto().add(cancelar);
+//                    cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/limpiar.png")));
+//                    cancelar.setBounds(1186, 50, 110, 23);
+//
+//                    prin.getBtnGuardarPro().setText("Actualizar");
+//
+//                    cancelar.addMouseListener(new MouseAdapter() {
+//                        @Override
+//                        public void mouseClicked(MouseEvent e) {
+//                            modProd.limpiar(prin.getJpNuevoProducto().getComponents());
+////                            prin.getJpNuevoProducto().setBorder(titulo("Nuevo Producto"));                            
+//                            cancelar.setVisible(false);
+//                        }
+//                    });
+//                    //Obligamos que la interfaz se reinicie
+                    prin.getJpNuevoProducto().revalidate();
+                    prin.getJpNuevoProducto().repaint();
+
+                }
+                if (columna == 7) {
+                    contUsua.eliminarUsuario(modUsu.getDoc());
+                    modUsu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
+                }
+
+            }
+
+        });
     }
 
     public void gestionUsuario() {
@@ -111,7 +179,6 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), "", "proveedor");
     }
 
-  
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos
         if (e.getSource().equals(prin.getBtnNuevo())) {//Se crea al acción cuando le damos clic en el boton nuevo de la vista princial
@@ -134,10 +201,18 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
             prin.getTxtImaPro().setText(archivo);
         }
         if (e.getSource().equals(prin.getBtnGuardarPro())) {
+
             modProd.setNom(prin.getTxtNomProd().getText());
             modProd.setDes(prin.getTxaDescPro().getText());
             modProd.setImagen(modProd.obtnerImagen(modProd.getRuta()));
-            modProd.insertarProducto();
+
+            if (prin.getBtnGuardarPro().getText().equals("Guardar")) {
+                modProd.insertarProducto();
+                iniciar(0);
+            } else {
+                System.out.println("La ruta del producto " + modProd.getRuta());
+            }
+
             modProd.limpiar(prin.getJpNuevoProducto().getComponents());
 
         }
@@ -149,6 +224,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         int seleccion = prin.getJtPrincipal().getSelectedIndex();
 
         if (seleccion == 0) {
+            gestionProducto();
 
         }
         if (seleccion == 1) {
@@ -167,6 +243,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
+        modProd.mostrarTablaProducto(prin.getTbProducto(), prin.getTxtBuscarProd().getText(), "producto");
 
     }
 
@@ -175,6 +252,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
+        modProd.mostrarTablaProducto(prin.getTbProducto(), prin.getTxtBuscarProd().getText(), "producto");
     }
 
     @Override
@@ -182,6 +260,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
+        modProd.mostrarTablaProducto(prin.getTbProducto(), prin.getTxtBuscarProd().getText(), "producto");
     }
 
 }

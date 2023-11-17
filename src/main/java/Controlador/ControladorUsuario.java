@@ -27,15 +27,16 @@ public class ControladorUsuario implements ActionListener {
     Nuevo_Usuario nuevo = new Nuevo_Usuario();
     Principal prin = new Principal();
     ModeloUsuario usu = new ModeloUsuario();
+    ControladorPrincipal pri = new ControladorPrincipal();
 
     public ControladorUsuario() {
         nuevo.getBtnGuardar().addActionListener(this);
         nuevo.getBtnMostrar().addActionListener(this);
+        nuevo.getBtnCancelar().addActionListener(this);
         nuevo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Desactiva la x que cierrar el programa para que permita abrir o volver a la ventana principal
         nuevo.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
-
-                ControladorPrincipal pri = new ControladorPrincipal();
+                
                 pri.iniciar(1);
             }
         });
@@ -65,7 +66,6 @@ public class ControladorUsuario implements ActionListener {
         for (String tipo : datoT.keySet()) {
             nuevo.getJcTipo().addItem(tipo);
         }
-
     }
 
     @Override
@@ -125,6 +125,9 @@ public class ControladorUsuario implements ActionListener {
                     nuevo.dispose();
                 }
             }
+        }
+        if(e.getSource().equals(nuevo.getBtnCancelar())){
+            nuevo.dispose();
         }
     }
 

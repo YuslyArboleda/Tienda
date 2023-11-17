@@ -200,6 +200,14 @@ public class Principal extends javax.swing.JFrame {
     public void setTbProducto(JTable tbProducto) {
         this.tbProducto = tbProducto;
     }
+
+    public JTextField getTxtBuscarProd() {
+        return txtBuscarProd;
+    }
+
+    public void setTxtBuscarProd(JTextField txtBuscarProd) {
+        this.txtBuscarProd = txtBuscarProd;
+    }
     
     
     
@@ -447,8 +455,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jpProductoLayout = new javax.swing.GroupLayout(jpProducto);
@@ -469,7 +477,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jpNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jtPrincipal.addTab("Producto", jpProducto);

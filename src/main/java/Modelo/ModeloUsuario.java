@@ -37,6 +37,7 @@ public class ModeloUsuario {
     public void setTip(int tip) {
         this.tip = tip;
     }
+
     /*Creamos los getter y setter*/
     public int getDoc() {
         return doc;
@@ -184,25 +185,6 @@ public class ModeloUsuario {
         }
 
     }
-
-    public void agregarBoton(String nomPesta, String[]objeto, Object valor,Object valor2,Object valor3){
-       
-        if(nomPesta.equals("usuario")){
-            System.out.println(nomPesta);
-            
-            objeto= Arrays.copyOf(objeto,objeto.length+2);
-            
-            objeto[objeto.length-2]=String.valueOf(valor);
-            objeto[objeto.length-1]=String.valueOf(valor2);
-            System.out.println(objeto.length);
-            
-        }else{
-            objeto= Arrays.copyOf(objeto,objeto.length+1);
-            objeto[objeto.length-1]=String.valueOf(valor3);
-        }       
-        
-    }
-
     public void mostrarTablaUsuario(JTable tabla, String valor, String nomPesta) {
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();
@@ -221,19 +203,18 @@ public class ModeloUsuario {
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
-        
-        String[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
+
+        Object[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
         int total = titulo.length;//Para gardar el tamaño del cector titulo original
-//        agregarBoton(nomPesta, titulo, "", "", "");
-        if(nomPesta.equals("usuario")){
-            
-            titulo= Arrays.copyOf(titulo,titulo.length+2);
-            titulo[titulo.length-2]="";
-            titulo[titulo.length-1]="";
-            
-        }else{
-            titulo= Arrays.copyOf(titulo,titulo.length+1);
-            titulo[titulo.length-1]="";
+        if (nomPesta.equals("usuario")) {
+
+            titulo = Arrays.copyOf(titulo, titulo.length + 2);
+            titulo[titulo.length - 2] = "";
+            titulo[titulo.length - 1] = "";
+
+        } else {
+            titulo = Arrays.copyOf(titulo, titulo.length + 1);
+            titulo[titulo.length - 1] = "";
         }
 
         DefaultTableModel tablaUsuario = new DefaultTableModel(null, titulo) {
@@ -256,14 +237,14 @@ public class ModeloUsuario {
                 for (int i = 0; i < total; i++) {
                     dato[i] = rs.getString(i + 1);
                 }
-                Object[] fila={dato[0], dato[1], dato[2], dato[6], dato[3], dato[4], dato[5], dato[7], dato[8]};
-                if(nomPesta.equals("usuario")){
-                    fila= Arrays.copyOf(fila, fila.length+2);
-                    fila[fila.length-2]=editar;
-                    fila[fila.length-1]=eliminar;
-                }else{
-                    fila= Arrays.copyOf(fila, fila.length+1);
-                    fila[fila.length-1]=agregar;
+                Object[] fila = {dato[0], dato[1], dato[2], dato[6], dato[3], dato[4], dato[5], dato[7], dato[8]};
+                if (nomPesta.equals("usuario")) {
+                    fila = Arrays.copyOf(fila, fila.length + 2);
+                    fila[fila.length - 2] = editar;
+                    fila[fila.length - 1] = eliminar;
+                } else {
+                    fila = Arrays.copyOf(fila, fila.length + 1);
+                    fila[fila.length - 1] = agregar;
                 }
                 tablaUsuario.addRow(fila);
             }
@@ -275,7 +256,7 @@ public class ModeloUsuario {
         tabla.setModel(tablaUsuario);
         //Darle tamaño a cada columna
         int numColumnas = tabla.getColumnCount();
-        int[] tamanos = {150, 100, 180, 150, 100, 100, 200, 150,100};
+        int[] tamanos = {150, 100, 180, 150, 100, 100, 200, 150, 100};
 
         if (nomPesta.equals("usuario")) {
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
@@ -333,21 +314,22 @@ public class ModeloUsuario {
         }
         return null;
     }
-    public void actualizarUsuario(){
+
+    public void actualizarUsuario() {
         Conexion con = new Conexion();
         Connection cn = con.iniciarConexion();
-        
-        String actUsuario= "call usuario_act(?,?,?,?,?,?,?,?,?)";
+
+        String actUsuario = "call usuario_act(?,?,?,?,?,?,?,?,?)";
         try {
-            PreparedStatement ps= cn.prepareStatement(actUsuario);
-            ps.setInt(1, getDoc());            
+            PreparedStatement ps = cn.prepareStatement(actUsuario);
+            ps.setInt(1, getDoc());
             ps.setString(2, getNom());
             ps.setString(3, getTel());
             ps.setString(4, getCor());
             ps.setString(5, getDir());
             ps.setDate(6, getFec());
             ps.setInt(7, getSex());
-            ps.setInt(8, getRol());           
+            ps.setInt(8, getRol());
             ps.setString(9, getCl());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Almacenado");
@@ -356,11 +338,12 @@ public class ModeloUsuario {
             e.printStackTrace();
         }
     }
-    public void eliminarUsuario(){
+
+    public void eliminarUsuario() {
         Conexion con = new Conexion();
-        Connection cn= con.iniciarConexion();
-        
-        String eliUsuario ="Call usuario_elim(?)";
+        Connection cn = con.iniciarConexion();
+
+        String eliUsuario = "Call usuario_elim(?)";
         try {
             PreparedStatement ps = cn.prepareStatement(eliUsuario);
             ps.setInt(1, getDoc());
@@ -371,6 +354,5 @@ public class ModeloUsuario {
             e.printStackTrace();
         }
     }
-    
 
 }
