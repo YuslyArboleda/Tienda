@@ -25,24 +25,6 @@ public class ControladorProducto {
     public ControladorProducto() {
     }
 
-    void actualizarProducto(int id) {
-//        modPro.buscarProducto(id);
-//        System.out.println(modPro.getRuta());
-//       
-//        prin.getTxtNomProd().setText(modPro.getNom());
-//        prin.getTxaDescPro().setText(modPro.getDes());
-//        File file = new File(modPro.getRuta());
-//        String archivo = file.getName();
-//        prin.getTxtImaPro().setText(archivo);
-
-//        
-        Border borde = BorderFactory.createTitledBorder(null, "Actualizar Producto",
-                javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));
-        prin.getJpNuevoProducto().setBorder(borde);
-        prin.getBtnGuardarPro().setText("Actualizar");
-
-    }
 
     void buscarProducto(int id) {
         JButton cancelar = new JButton("Cancelar");

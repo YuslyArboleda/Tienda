@@ -20,7 +20,7 @@ public class ControladorLogin implements ActionListener {
     public ControladorLogin() {
         log.getBtnIniciar().addActionListener(this);
         log.getBtnMostrarClave().addActionListener(this);
-        log.addKeyListener(new KeyAdapter() {
+        log.getBtnIniciar().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -57,11 +57,11 @@ public class ControladorLogin implements ActionListener {
             if (log.getJpContra().getEchoChar() == '\u2022') {
                 log.getJpContra().setEchoChar((char) 0);
                 log.getBtnMostrarClave().setIcon(new javax.swing.ImageIcon(
-                        getClass().getResource("/img/ojo-cruzado.png")));
+                        getClass().getResource("/img/ocultar_ojito.png")));
             } else {
                 log.getJpContra().setEchoChar('\u2022');
                 log.getBtnMostrarClave().setIcon(new javax.swing.ImageIcon(
-                        getClass().getResource("/img/ojo.png")));
+                        getClass().getResource("/img/visto.png")));
             }
         }
         if (e.getSource() == (log.getBtnIniciar())) {

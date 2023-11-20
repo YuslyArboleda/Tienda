@@ -73,11 +73,11 @@ public class ControladorUsuario implements ActionListener {
             if (nuevo.getJpfClave().getEchoChar() == '\u2022') {
                 nuevo.getJpfClave().setEchoChar((char) 0);
                 nuevo.getBtnMostrar().setIcon(new javax.swing.ImageIcon(
-                        getClass().getResource("/img/ojo-cruzado.png")));
+                        getClass().getResource("/img/ocultar_ojito.png")));
             } else {
                 nuevo.getJpfClave().setEchoChar('\u2022');
                 nuevo.getBtnMostrar().setIcon(new javax.swing.ImageIcon(
-                        getClass().getResource("/img/ojo.png")));
+                        getClass().getResource("/foto.png")));
             }
         }
 

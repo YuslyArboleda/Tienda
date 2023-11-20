@@ -53,6 +53,7 @@ public class ControladorFactura implements ActionListener, DocumentListener {
         }
 
     }
+    
 
     public void gestion_Usuario(String dato, int pes) {
       

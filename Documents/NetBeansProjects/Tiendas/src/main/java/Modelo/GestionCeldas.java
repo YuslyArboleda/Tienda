@@ -23,7 +23,9 @@ public class GestionCeldas extends DefaultTableCellRenderer {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         c.setForeground(new java.awt.Color(0, 0, 0));
         c.setFont(new java.awt.Font("Verdana", 0, 12));
+        
         if (value instanceof JButton) {
+            table.setRowHeight(25);
             JButton btn = (JButton) value;
             btn.setBorderPainted(false);
 //            btn.setContentAreaFilled(false);

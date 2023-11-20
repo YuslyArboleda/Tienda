@@ -86,49 +86,53 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 0, 153));
         jLabel2.setText("Constraseña");
 
-        lblImagusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceso.png"))); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
+        lblImagusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/programador.png"))); // NOI18N
+
+        jpContra.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jpContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jpContraActionPerformed(evt);
             }
         });
 
-        btnMostrarClave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver (1).png"))); // NOI18N
+        btnMostrarClave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visto.png"))); // NOI18N
         btnMostrarClave.setBorderPainted(false);
         btnMostrarClave.setContentAreaFilled(false);
 
         btnIniciar.setForeground(new java.awt.Color(153, 0, 153));
         btnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iniciar-sesion (1).png"))); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpInicioLayout = new javax.swing.GroupLayout(jpInicio);
         jpInicio.setLayout(jpInicioLayout);
         jpInicioLayout.setHorizontalGroup(
             jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpInicioLayout.createSequentialGroup()
-                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIniciar)
                     .addGroup(jpInicioLayout.createSequentialGroup()
                         .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUsuario)
+                            .addComponent(jLabel2))
+                        .addGap(33, 33, 33)
+                        .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jpInicioLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUsuario)
-                                    .addComponent(jLabel2))
-                                .addGap(33, 33, 33)
-                                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jpContra, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                    .addComponent(txtUsuario))
+                                .addComponent(jpContra, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnMostrarClave))
+                            .addComponent(txtUsuario)
                             .addGroup(jpInicioLayout.createSequentialGroup()
-                                .addGap(180, 180, 180)
-                                .addComponent(lblImagusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpInicioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnIniciar)))
-                .addContainerGap())
+                                .addGap(20, 20, 20)
+                                .addComponent(lblImagusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jpInicioLayout.setVerticalGroup(
             jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +149,9 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jpContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnMostrarClave, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIniciar)
-                .addGap(197, 197, 197))
+                .addGap(202, 202, 202))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,9 +159,9 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jpInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jpInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,6 +179,10 @@ public class Login extends javax.swing.JFrame {
     private void jpContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpContraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jpContraActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     /**
      * @param args the command line arguments

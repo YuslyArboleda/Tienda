@@ -10,12 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
@@ -91,17 +96,20 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                     modProd.buscarProducto(modProd.getId());
                     prin.getTxtNomProd().setText(modProd.getNom());
                     prin.getTxaDescPro().setText(modProd.getDes());
+                    prin.getTxtImaPro().setVisible(false);
                     File file = new File(modProd.getRuta());
                     String archivo = file.getName();
                     prin.getTxtImaPro().setText(archivo);
                     prin.getJpNuevoProducto().setBorder(titulo("Actualizar Producto"));
                     prin.getJpNuevoProducto().add(cancelar);
+                   
                     
-                    cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/limpiar.png")));
+
+                    cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/destellos.png")));
+                    
                     cancelar.setBounds(1186, 50, 110, 23);
-                    
                     prin.getBtnGuardarPro().setText("Actualizar");
-                    
+
                     cancelar.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {

@@ -201,7 +201,7 @@ public class ModeloUsuario {
         JButton agregar = new JButton();
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar (3).png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
 
         Object[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};

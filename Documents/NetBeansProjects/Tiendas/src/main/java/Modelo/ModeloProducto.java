@@ -162,7 +162,7 @@ public class ModeloProducto {
         JButton agregar = new JButton();
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar (3).png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
 
         String[] titulo = {"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"};
@@ -201,7 +201,7 @@ public class ModeloProducto {
                     BufferedImage bfImag = null;
                     InputStream inStr = new ByteArrayInputStream(imag);
                     bfImag = ImageIO.read(inStr);
-                    ImageIcon imagen = new ImageIcon(bfImag.getScaledInstance(60, 60, 0));
+                    ImageIcon imagen = new ImageIcon(bfImag.getScaledInstance(50, 50, 0));
                     dato[1] = new JLabel(imagen);
                 } catch (Exception e) {
                     dato[1] = new JLabel("No Imagenes");
@@ -260,6 +260,7 @@ public class ModeloProducto {
                 setNom(rs.getString(2));
                 setDes(rs.getString(3));
                 setRuta(rs.getString(4));
+                setImagen(rs.getBytes(5));
             }
 
         } catch (SQLException e) {
