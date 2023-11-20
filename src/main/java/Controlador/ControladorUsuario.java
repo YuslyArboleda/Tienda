@@ -27,7 +27,7 @@ public class ControladorUsuario implements ActionListener {
     Nuevo_Usuario nuevo = new Nuevo_Usuario();
     Principal prin = new Principal();
     ModeloUsuario usu = new ModeloUsuario();
-    ControladorPrincipal pri = new ControladorPrincipal();
+//    
 
     public ControladorUsuario() {
         nuevo.getBtnGuardar().addActionListener(this);
@@ -36,7 +36,7 @@ public class ControladorUsuario implements ActionListener {
         nuevo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Desactiva la x que cierrar el programa para que permita abrir o volver a la ventana principal
         nuevo.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
-                
+                ControladorPrincipal pri = new ControladorPrincipal();
                 pri.iniciar(1);
             }
         });
@@ -172,7 +172,7 @@ public class ControladorUsuario implements ActionListener {
                 javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));
         nuevo.getJpusuario().setBorder(borde);
-        prin.setVisible(false);
+//        prin.setVisible(false);
         nuevo.setLocationRelativeTo(null);
         nuevo.getBtnGuardar().setText("Actualizar");
         nuevo.setVisible(true);
