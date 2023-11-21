@@ -96,17 +96,14 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                     modProd.buscarProducto(modProd.getId());
                     prin.getTxtNomProd().setText(modProd.getNom());
                     prin.getTxaDescPro().setText(modProd.getDes());
-                    prin.getTxtImaPro().setVisible(false);
                     File file = new File(modProd.getRuta());
                     String archivo = file.getName();
                     prin.getTxtImaPro().setText(archivo);
                     prin.getJpNuevoProducto().setBorder(titulo("Actualizar Producto"));
                     prin.getJpNuevoProducto().add(cancelar);
-                   
-                    
 
                     cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/destellos.png")));
-                    
+
                     cancelar.setBounds(1186, 50, 110, 23);
                     prin.getBtnGuardarPro().setText("Actualizar");
 
