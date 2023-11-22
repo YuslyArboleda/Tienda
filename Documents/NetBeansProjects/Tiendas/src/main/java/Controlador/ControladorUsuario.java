@@ -13,6 +13,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -67,6 +69,13 @@ public class ControladorUsuario implements ActionListener {
         }
     }
 
+    public boolean validarCorreo(String correo) {
+        String valor = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern validar = Pattern.compile(valor);
+        Matcher cor = validar.matcher(correo);
+        return cor.matches();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(nuevo.getBtnMostrar())) {
@@ -77,7 +86,7 @@ public class ControladorUsuario implements ActionListener {
             } else {
                 nuevo.getJpfClave().setEchoChar('\u2022');
                 nuevo.getBtnMostrar().setIcon(new javax.swing.ImageIcon(
-                        getClass().getResource("/foto.png")));
+                        getClass().getResource("/img/foto.png")));
             }
         }
 
@@ -88,44 +97,50 @@ public class ControladorUsuario implements ActionListener {
                     || nuevo.getJdFecha().getDate() == null || nuevo.getJpfClave().getPassword() == null || nuevo.getJcTipo().getSelectedItem().equals("Seleccione...")) {
                 JOptionPane.showMessageDialog(null, "Debe completar los campos requeridos...");
             } else {
-                //Combobox
-                String valorSexo = nuevo.getJcvsexo().getSelectedItem().toString();//
-                int sexo = usu.llenarCombo("sexo").get(valorSexo);
-                String valorRol = nuevo.getCbxCargo().getSelectedItem().toString();//
-                int rol = usu.llenarCombo("rol").get(valorRol);
-                String valorTipo = nuevo.getCbxCargo().getSelectedItem().toString();//
-                int tipo = usu.llenarCombo("rol").get(valorTipo);
-                //Seleccion de fecha, Cambiando al formato de fecha que entiende sql
-                java.util.Date fec = nuevo.getJdFecha().getDate();
-                long fe = fec.getTime();
-                java.sql.Date fecha = new Date(fe);
+                ControladorPrincipal contPrin = new ControladorPrincipal();
+                if (!contPrin.validarCorreo(nuevo.getTxtCorreo().getText())) {
+                    JOptionPane.showMessageDialog(null, "Correo electrónico invalido");
 
-                //Contraseña
-                char[] contra = nuevo.getJpfClave().getPassword();
-                String contrasena = String.valueOf(contra);
-                usu.setTip(tipo);
-                usu.setDoc(Integer.parseInt(nuevo.getTxtDocumento().getText()));
-                usu.setNom(nuevo.getTxtNombre().getText());
-                usu.setFec(fecha);
-                usu.setTel(nuevo.getTxtTelefono().getText());
-                usu.setCor(nuevo.getTxtCorreo().getText());
-                usu.setDir(nuevo.getTxtDireccion().getText());
-                usu.setSex(sexo);
-                usu.setRol(rol);
-                usu.setLo(nuevo.getTxtLogin().getText());
-                usu.setCl(contrasena);
-
-                if (nuevo.getBtnGuardar().getText().equals("Guardar")) {
-                    usu.insertarUsuario();
-                    usu.limpiar(nuevo.getJpusuario().getComponents());
                 } else {
-                    usu.actualizarUsuario();
-                    nuevo.setVisible(false);
-                    nuevo.dispose();
+                    //Combobox
+                    String valorSexo = nuevo.getJcvsexo().getSelectedItem().toString();//
+                    int sexo = usu.llenarCombo("sexo").get(valorSexo);
+                    String valorRol = nuevo.getCbxCargo().getSelectedItem().toString();//
+                    int rol = usu.llenarCombo("rol").get(valorRol);
+                    String valorTipo = nuevo.getCbxCargo().getSelectedItem().toString();//
+                    int tipo = usu.llenarCombo("rol").get(valorTipo);
+                    //Seleccion de fecha, Cambiando al formato de fecha que entiende sql
+                    java.util.Date fec = nuevo.getJdFecha().getDate();
+                    long fe = fec.getTime();
+                    java.sql.Date fecha = new Date(fe);
+
+                    //Contraseña
+                    char[] contra = nuevo.getJpfClave().getPassword();
+                    String contrasena = String.valueOf(contra);
+                    usu.setTip(tipo);
+                    usu.setDoc(Integer.parseInt(nuevo.getTxtDocumento().getText()));
+                    usu.setNom(nuevo.getTxtNombre().getText());
+                    usu.setFec(fecha);
+                    usu.setTel(nuevo.getTxtTelefono().getText());
+                    usu.setCor(nuevo.getTxtCorreo().getText());
+                    usu.setDir(nuevo.getTxtDireccion().getText());
+                    usu.setSex(sexo);
+                    usu.setRol(rol);
+                    usu.setLo(nuevo.getTxtLogin().getText());
+                    usu.setCl(contrasena);
+
+                    if (nuevo.getBtnGuardar().getText().equals("Guardar")) {
+                        usu.insertarUsuario();
+                        usu.limpiar(nuevo.getJpusuario().getComponents());
+                    } else {
+                        usu.actualizarUsuario();
+                        nuevo.setVisible(false);
+                        nuevo.dispose();
+                    }
                 }
             }
         }
-        if(e.getSource().equals(nuevo.getBtnCancelar())){
+        if (e.getSource().equals(nuevo.getBtnCancelar())) {
             nuevo.dispose();
         }
     }
@@ -159,14 +174,14 @@ public class ControladorUsuario implements ActionListener {
         }
         String valorRol = usu.obtenerSeleccion(datos, usu.getRol());
         nuevo.getCbxCargo().setSelectedItem(valorRol);
-//        
+
         Map<String, Integer> datoT = usu.llenarCombo("tipodoc");
         for (String tipo : datoT.keySet()) {
             nuevo.getJcTipo().addItem(tipo);
         }
         String valorTipo = usu.obtenerSeleccion(datoT, usu.getTip());
         nuevo.getJcTipo().setSelectedItem(valorTipo);
-//        
+
         Border borde = BorderFactory.createTitledBorder(null, "Actualizar Usuario",
                 javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));

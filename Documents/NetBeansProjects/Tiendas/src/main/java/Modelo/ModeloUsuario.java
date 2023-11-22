@@ -202,7 +202,7 @@ public class ModeloUsuario {
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar (3).png")));
-        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
+        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar-usuario.png")));
 
         Object[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento", "Rol"};
         int total = titulo.length;//Para gardar el tamaño del cector titulo original
@@ -332,7 +332,7 @@ public class ModeloUsuario {
             ps.setInt(8, getRol());
             ps.setString(9, getCl());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro Almacenado");
+            JOptionPane.showMessageDialog(null, "Registro Actualizado");
             cn.close();
         } catch (SQLException e) {
             e.printStackTrace();

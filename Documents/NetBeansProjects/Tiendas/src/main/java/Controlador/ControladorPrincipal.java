@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -36,6 +38,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     ControladorCliente contCli = new ControladorCliente();
     ControladorProveedor contProv = new ControladorProveedor();
     ControladorProducto contrProd = new ControladorProducto();
+    ControladorFactura contFac = new ControladorFactura();
 
     ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
     ModeloProveedor modProv = new ModeloProveedor();
@@ -48,12 +51,15 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         prin.getBtnNuevoProv().addActionListener(this);
         prin.getBtnImagen().addActionListener(this);
         prin.getBtnGuardarPro().addActionListener(this);
+        prin.getBtnFactUsu().addActionListener(this);
+        prin.getBtnFactProv().addActionListener(this);
 
         prin.getJtPrincipal().addChangeListener(this);
 
         prin.getTxtBuscar().getDocument().addDocumentListener(this);
         prin.getTxtBuscarCli().getDocument().addDocumentListener(this);
         prin.getTxtBuscarProv().getDocument().addDocumentListener(this);
+        prin.getTxtBuscarCompra().getDocument().addDocumentListener(this);
 
     }
 
@@ -65,6 +71,12 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         prin.setVisible(true);//Hace visible la ventana
         gestionProducto();
 
+    }
+    public boolean validarCorreo(String correo){
+        String valor= "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+.[A-Z|a-z]{2,}$";
+        Pattern validar = Pattern.compile(valor);
+        Matcher cor = validar.matcher(correo);
+        return cor.matches();
     }
 
     public Border titulo(String tit) {
@@ -231,6 +243,14 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
             }
 
+        }
+        if(e.getSource().equals(prin.getBtnFactUsu())){
+            prin.setVisible(false);
+            contFac.buscar("usuario");
+        }
+        if(e.getSource().equals(prin.getBtnFactProv())){
+            prin.setVisible(false);
+            contFac.buscar("proveedor");
         }
 
     }

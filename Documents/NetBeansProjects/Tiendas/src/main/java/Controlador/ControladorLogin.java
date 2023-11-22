@@ -5,6 +5,8 @@ import Vista.Login;
 import Vista.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,35 +22,43 @@ public class ControladorLogin implements ActionListener {
     public ControladorLogin() {
         log.getBtnIniciar().addActionListener(this);
         log.getBtnMostrarClave().addActionListener(this);
+
+        log.getJpContra().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                log.getBtnIniciar().requestFocus();
+            }
+        });
         log.getBtnIniciar().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.println("enter");
                     validar();
                 }
-                
             }
 
         });
+
     }
 
     public void validar() {
         modlog.setUsu(log.getTxtUsuario().getText());
-        String pass = new String(log.getJpContra().getPassword());
-        modlog.setContra(pass);
-        if (modlog.validar(modlog.getUsu(), modlog.getContra())) {
-            log.setVisible(false);
-            prin.iniciar(0);
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
-        }
+            String pass = new String(log.getJpContra().getPassword());
+            modlog.setContra(pass);
+            if (modlog.validar(modlog.getUsu(), modlog.getContra())) {
+                log.setVisible(false);
+                prin.iniciar(0);
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+            }
+
     }
 
     public void iniciarVista() {
         log.setLocationRelativeTo(null);//Centrando la vista
         log.setTitle("Iniciar Sesión");// Titulo a la vista
         log.setVisible(true);//Visible la vista
+        log.getBtnIniciar().requestFocus();
     }
 
     @Override
