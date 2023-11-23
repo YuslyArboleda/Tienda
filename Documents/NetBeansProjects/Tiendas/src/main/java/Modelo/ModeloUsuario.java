@@ -218,17 +218,14 @@ public class ModeloUsuario {
         }
 
         DefaultTableModel tablaUsuario = new DefaultTableModel(null, titulo) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        String sqlUsuario;
-        if (valor.equals("")) {
-            sqlUsuario = " SELECT * FROM mostrar_usuario ";
-        } else {
-            sqlUsuario = "call usuario_cons('" + valor + "')";
-        }
+        String sqlUsuario=valor.isEmpty()?" SELECT * FROM mostrar_usuario ":"call usuario_cons('" + valor + "')";
+        
         try {
             String[] dato = new String[titulo.length];
             Statement st = cn.createStatement();

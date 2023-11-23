@@ -1,9 +1,11 @@
 package Controlador;
 
 import Modelo.ModeloCliente;
+import Modelo.ModeloFactura;
 import Modelo.ModeloProducto;
 import Modelo.ModeloProveedor;
 import Modelo.ModeloUsuario;
+import Vista.DetalleFactura;
 import Vista.Principal;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -44,6 +46,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     ModeloProveedor modProv = new ModeloProveedor();
     ModeloCliente modCli = new ModeloCliente();
     ModeloProducto modProd = new ModeloProducto();
+    ModeloFactura modFact = new ModeloFactura();
 
     public ControladorPrincipal() {
         prin.getBtnNuevo().addActionListener(this);//Agrega el boton nuevo para que se escuche cuando se de clic
@@ -84,6 +87,22 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                 javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Verdana", 1, 12), new java.awt.Color(153, 0, 153));
         return borde;
+    }
+    void CompraVenta(int pest, String usu, String pro, String nomU,String nomP) {
+        
+        prin.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        prin.getJtPrincipal().setSelectedIndex(pest);
+        if (pest == 4) {
+            prin.getTxtFact_Usu().setText(usu);
+            prin.getLblFac_Usu().setText(nomU);
+            prin.getTxtFact_prov().setText(pro);
+            prin.getLblFacProv().setText(nomP);
+        }
+        if(pest==5){
+            prin.getTxtVenUsu().setText(usu);
+        }
+        prin.setVisible(true);
+
     }
 
     public void gestionProducto() {
@@ -204,6 +223,24 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     public void gestionProveedor() {
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), "", "proveedor");
     }
+    public void gestionFactura(){
+        modFact.mostrarTablaFactura(prin.getTbFactura(), "");
+        prin.getTbFactura().addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                int fila= prin.getTbFactura().rowAtPoint(e.getPoint());
+                int col= prin.getTbFactura().columnAtPoint(e.getPoint());
+                modFact.setFac(Integer.parseInt(prin.getTbFactura().getValueAt(fila, 0).toString()));
+                if(col==8){
+                    DetalleFactura det = new DetalleFactura();
+                    det.getTxtFacDet().setText(String.valueOf(modFact.getFac()));
+                    det.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    det.setLocationRelativeTo(null);
+                    det.setVisible(true);
+                }
+            }
+            
+        });
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos
@@ -246,11 +283,13 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         }
         if(e.getSource().equals(prin.getBtnFactUsu())){
             prin.setVisible(false);
-            contFac.buscar("usuario");
+            contFac.buscar("Usuario",prin.getTxtFact_Usu().getText(),prin.getTxtFact_prov().getText(),
+                    prin.getLblFac_Usu().getText(),prin.getLblFacProv().getText());
         }
         if(e.getSource().equals(prin.getBtnFactProv())){
             prin.setVisible(false);
-            contFac.buscar("proveedor");
+            contFac.buscar("Proveedor",prin.getTxtFact_Usu().getText(),prin.getTxtFact_prov().getText(),
+                    prin.getLblFac_Usu().getText(),prin.getLblFacProv().getText());
         }
 
     }
@@ -270,6 +309,9 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         }
         if (seleccion == 3) {
             gestionProveedor();
+        }
+        if(seleccion == 4){
+            gestionFactura();
         }
     }
 
@@ -297,5 +339,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
         modProd.mostrarTablaProducto(prin.getTbProducto(), prin.getTxtBuscarProd().getText(), "producto");
     }
+
+    
 
 }
