@@ -26,20 +26,28 @@ import javax.swing.table.TableColumn;
 public class ModeloProveedor {
 
     /* Creamos los atributos o variables  que necesita para realizar los procesos de base de datos*/
-    private int doc, sex, per;
-    private String nit, nom, dir, tel, cor;
+    private int id, tipo_doc, sex, per;
+    private String doc, nom, dir, tel, cor;
     private Date fec;
 
     public ModeloProveedor() {
     }
 
-    /*Creamos los getter y setter*/
-    public int getDoc() {
+    public String getDoc() {
         return doc;
     }
 
-    public void setDoc(int doc) {
+    /*Creamos los getter y setter*/
+    public void setDoc(String doc) {
         this.doc = doc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSex() {
@@ -58,12 +66,12 @@ public class ModeloProveedor {
         this.per = per;
     }
 
-    public String getNit() {
-        return nit;
+    public int getTipo_doc() {
+        return tipo_doc;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    public void setTipo_doc(int tipo_doc) {
+        this.tipo_doc = tipo_doc;
     }
 
     public String getNom() {
@@ -107,11 +115,11 @@ public class ModeloProveedor {
     }
 
     /*Creamos el metodo para llenar los combos a través de Map o diccionario*/
-    public Map<String, Integer> llenarCombo() {
+    public Map<String, Integer> llenarCombo(String valor) {
         //Llamamos a la clase conexión
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();//Instanciamos la conexion
-        String sql = "Select * from mostrar_sexo";
+        String sql = "Select * from mostrar_" + valor;
 
         Map<String, Integer> llenar_combo = new HashMap<>();
         try {
@@ -135,12 +143,12 @@ public class ModeloProveedor {
         String sql = "Call proveedor_ins(?,?,?,?,?,?,?,?,?)";//Consulta a realizar a la base de datos
         try {
             PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setInt(1, getDoc());
-            ps.setString(2, getNit());
+            ps.setString(1, getDoc());
+            ps.setInt(2, getTipo_doc());
             ps.setString(3, getNom());
             ps.setInt(4, getPer());
             ps.setDate(5, getFec());
-            ps.setInt(5, getSex());
+            ps.setInt(6, getSex());
             ps.setString(7, getTel());
             ps.setString(8, getCor());
             ps.setString(9, getDir());
@@ -188,7 +196,7 @@ public class ModeloProveedor {
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png")));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
 
-        String[] titulo = {"Tipo de Documento", "Documento", "Nombre", "Tipo Persona", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento"};
+        String[] titulo = {"Código", "Tipo de Documento", "Documento", "Nombre", "Tipo Persona", "Dirección", "Celular", "Género", "Correo", "Fecha de Nacimiento"};
         int total = titulo.length;
 
         if (nomPesta.equals("proveedor")) {
@@ -218,7 +226,7 @@ public class ModeloProveedor {
                 for (int i = 0; i < total; i++) {
                     dato[i] = rs.getString(i + 1);
                 }
-                Object[] fila = {dato[0], dato[1], dato[2], dato[3], dato[4], dato[5], dato[6], dato[7], dato[8]};
+                Object[] fila = {dato[9], dato[0], dato[1], dato[2], dato[3], dato[4], dato[5], dato[6], dato[7], dato[8]};
                 if (nomPesta.equals("proveedor")) {
                     fila = Arrays.copyOf(fila, fila.length + 2);
                     fila[fila.length - 2] = editar;
@@ -237,7 +245,7 @@ public class ModeloProveedor {
         tabla.setModel(tablaProveedor);
         //Darle tamaño a cada columna
         int numColumnas = tabla.getColumnCount();
-        int[] tamanos = {150, 100, 150, 130, 150, 100, 100, 200, 150};
+        int[] tamanos = {20, 150, 100, 150, 130, 150, 100, 100, 200, 150};
 
         if (nomPesta.equals("proveedor")) {
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
@@ -263,15 +271,16 @@ public class ModeloProveedor {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                setDoc(rs.getInt(1));
-                setNit(rs.getString(2));
-                setPer(rs.getInt(3));
-                setNom(rs.getString(4));
-                setFec(rs.getDate(5));
-                setSex(rs.getInt(6));
-                setTel(rs.getString(7));
-                setCor(rs.getString(8));
-                setDir(rs.getString(9));
+                setId(rs.getInt(1));
+                setTipo_doc(rs.getInt(2));
+                setDoc(rs.getString(3));
+                setPer(rs.getInt(4));
+                setNom(rs.getString(5));
+                setFec(rs.getDate(6));
+                setSex(rs.getInt(7));
+                setTel(rs.getString(8));
+                setCor(rs.getString(9));
+                setDir(rs.getString(10));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -291,20 +300,21 @@ public class ModeloProveedor {
         Conexion con = new Conexion();
         Connection cn = con.iniciarConexion();
 
-        String actProveedor = "call proveedor_act(?,?,?,?,?,?,?,?,?)";
+        String actProveedor = "call proveedor_act(?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = cn.prepareStatement(actProveedor);
-            ps.setInt(1, getDoc());
-            ps.setString(2, getNit());
-            ps.setString(3, getNom());
-            ps.setInt(4, getPer());
-            ps.setDate(5, getFec());
-            ps.setInt(5, getSex());
-            ps.setString(7, getTel());
-            ps.setString(8, getCor());
-            ps.setString(9, getDir());
+            ps.setInt(1, getId());
+            ps.setString(3, getDoc());
+            ps.setInt(2, getTipo_doc());
+            ps.setString(4, getNom());
+            ps.setInt(5, getPer());
+            ps.setDate(6, getFec());
+            ps.setInt(7, getSex());
+            ps.setString(8, getTel());
+            ps.setString(9, getCor());
+            ps.setString(10, getDir());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro Almacenado");
+            JOptionPane.showMessageDialog(null, "Registro Actualizado");
             cn.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -318,7 +328,7 @@ public class ModeloProveedor {
         String eliProveedor = "Call proveedor_elim(?)";
         try {
             PreparedStatement ps = cn.prepareStatement(eliProveedor);
-            ps.setInt(1, getDoc());
+            ps.setInt(1, getId());
             ps.executeUpdate();
             Icon eliminar = new ImageIcon(getClass().getResource("/img/eliminar(2).png"));
             JOptionPane.showMessageDialog(null, "Registro Eliminado", "Eliminar Proveedor", JOptionPane.PLAIN_MESSAGE, (Icon) eliminar);

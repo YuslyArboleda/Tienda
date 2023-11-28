@@ -97,11 +97,11 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
     }
 
     public JTextField getTxtDocPro() {
-        return txtDocPro;
+        return txtDocProv;
     }
 
     public void setTxtDocPro(JTextField txtDocPro) {
-        this.txtDocPro = txtDocPro;
+        this.txtDocProv = txtDocPro;
     }
 
     public JTextField getTxtNombre() {
@@ -133,7 +133,7 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
 
         jpproveedor = new javax.swing.JPanel();
         lblDocuPro = new javax.swing.JLabel();
-        txtDocPro = new javax.swing.JTextField();
+        txtDocProv = new javax.swing.JTextField();
         lblnomPro = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblCorreo = new javax.swing.JLabel();
@@ -171,9 +171,9 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
         lblDocuPro.setForeground(new java.awt.Color(153, 0, 153));
         lblDocuPro.setText("Documento");
 
-        txtDocPro.addActionListener(new java.awt.event.ActionListener() {
+        txtDocProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDocProActionPerformed(evt);
+                txtDocProvActionPerformed(evt);
             }
         });
 
@@ -242,7 +242,6 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
 
         jcTipo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jcTipo.setForeground(new java.awt.Color(153, 0, 153));
-        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Cedula de Ciudadania", "Cedula de Extranjeria", "Pasaporte", "Nit" }));
 
         lblPersona.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(153, 0, 153));
@@ -250,7 +249,6 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
 
         jcPersona.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jcPersona.setForeground(new java.awt.Color(153, 0, 153));
-        jcPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Persona Natural", "Persona Juridica", " " }));
 
         javax.swing.GroupLayout jpproveedorLayout = new javax.swing.GroupLayout(jpproveedor);
         jpproveedor.setLayout(jpproveedorLayout);
@@ -264,7 +262,7 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
                             .addComponent(lblPersona, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblDocuPro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(52, 52, 52)
-                        .addComponent(txtDocPro)
+                        .addComponent(txtDocProv)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(273, 273, 273))
@@ -334,7 +332,7 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpproveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDocuPro)
-                    .addComponent(txtDocPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDocProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(14, 14, 14)
                 .addGroup(jpproveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -426,9 +424,9 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDocProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocProActionPerformed
+    private void txtDocProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocProvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocProActionPerformed
+    }//GEN-LAST:event_txtDocProvActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -467,7 +465,7 @@ public class Nuevo_Proveedor extends javax.swing.JFrame {
     private javax.swing.JLabel lbltipo;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDocPro;
+    private javax.swing.JTextField txtDocProv;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

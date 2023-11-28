@@ -75,6 +75,63 @@ public class ControladorUsuario implements ActionListener {
         Matcher cor = validar.matcher(correo);
         return cor.matches();
     }
+    void actualizarUsuario(int doc) {
+        usu.buscarUsuario(doc);
+        nuevo.getTxtDocumento().setEnabled(false);
+        nuevo.getTxtLogin().setEnabled(false);
+        nuevo.getJcTipo().setEnabled(false);
+        nuevo.getTxtDocumento().setText(String.valueOf(doc));
+        nuevo.getTxtCorreo().setText(usu.getCor());
+        nuevo.getTxtNombre().setText(usu.getNom());
+        nuevo.getTxtDireccion().setText(usu.getDir());
+        nuevo.getTxtTelefono().setText(usu.getTel());
+        nuevo.getTxtLogin().setText(usu.getLo());
+        nuevo.getJpfClave().setText(usu.getCl());
+        nuevo.getJdFecha().setDate(usu.getFec());
+        //Llenar el sexo
+        Map<String, Integer> dato = usu.llenarCombo("sexo");
+        for (String sexo : dato.keySet()) {
+            nuevo.getJcvsexo().addItem(sexo);
+        }
+//        //Obtener el valor guardado en la base de datos
+        String valorSexo = usu.obtenerSeleccion(dato, usu.getSex());
+        nuevo.getJcvsexo().setSelectedItem(valorSexo);
+//        
+        //Llenar el cargo
+        Map<String, Integer> datos = usu.llenarCombo("rol");
+        for (String rol : datos.keySet()) {
+            nuevo.getCbxCargo().addItem(rol);
+        }
+        String valorRol = usu.obtenerSeleccion(datos, usu.getRol());
+        nuevo.getCbxCargo().setSelectedItem(valorRol);
+
+        Map<String, Integer> datoT = usu.llenarCombo("tipodoc");
+        for (String tipo : datoT.keySet()) {
+            System.out.println(tipo);
+            nuevo.getJcTipo().addItem(tipo);
+        }
+        String valorTipo = usu.obtenerSeleccion(datoT, usu.getTip());
+        nuevo.getJcTipo().setSelectedItem(valorTipo);
+
+        Border borde = BorderFactory.createTitledBorder(null, "Actualizar Usuario",
+                javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));
+        nuevo.getJpusuario().setBorder(borde);
+        prin.setVisible(false);
+        nuevo.setLocationRelativeTo(null);
+        nuevo.getBtnGuardar().setText("Actualizar");
+        nuevo.setVisible(true);
+    }
+
+    void eliminarUsuario(int doc) {
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al usuario? \n" + doc,
+                "Eliminar Usuario", JOptionPane.YES_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            usu.setDoc(doc);
+            usu.eliminarUsuario();
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -145,60 +202,5 @@ public class ControladorUsuario implements ActionListener {
         }
     }
 
-    void actualizarUsuario(int doc) {
-        usu.buscarUsuario(doc);
-        nuevo.getTxtDocumento().setEnabled(false);
-        nuevo.getTxtLogin().setEnabled(false);
-        nuevo.getJcTipo().setEnabled(false);
-        nuevo.getTxtDocumento().setText(String.valueOf(doc));
-        nuevo.getTxtCorreo().setText(usu.getCor());
-        nuevo.getTxtNombre().setText(usu.getNom());
-        nuevo.getTxtDireccion().setText(usu.getDir());
-        nuevo.getTxtTelefono().setText(usu.getTel());
-        nuevo.getTxtLogin().setText(usu.getLo());
-        nuevo.getJpfClave().setText(usu.getCl());
-        nuevo.getJdFecha().setDate(usu.getFec());
-        //Llenar el sexo
-        Map<String, Integer> dato = usu.llenarCombo("sexo");
-        for (String sexo : dato.keySet()) {
-            nuevo.getJcvsexo().addItem(sexo);
-        }
-//        //Obtener el valor guardado en la base de datos
-        String valorSexo = usu.obtenerSeleccion(dato, usu.getSex());
-        nuevo.getJcvsexo().setSelectedItem(valorSexo);
-//        
-        //Llenar el cargo
-        Map<String, Integer> datos = usu.llenarCombo("rol");
-        for (String rol : datos.keySet()) {
-            nuevo.getCbxCargo().addItem(rol);
-        }
-        String valorRol = usu.obtenerSeleccion(datos, usu.getRol());
-        nuevo.getCbxCargo().setSelectedItem(valorRol);
-
-        Map<String, Integer> datoT = usu.llenarCombo("tipodoc");
-        for (String tipo : datoT.keySet()) {
-            nuevo.getJcTipo().addItem(tipo);
-        }
-        String valorTipo = usu.obtenerSeleccion(datoT, usu.getTip());
-        nuevo.getJcTipo().setSelectedItem(valorTipo);
-
-        Border borde = BorderFactory.createTitledBorder(null, "Actualizar Usuario",
-                javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153));
-        nuevo.getJpusuario().setBorder(borde);
-        prin.setVisible(false);
-        nuevo.setLocationRelativeTo(null);
-        nuevo.getBtnGuardar().setText("Actualizar");
-        nuevo.setVisible(true);
-    }
-
-    void eliminarUsuario(int doc) {
-        int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al usuario? \n" + doc,
-                "Eliminar Usuario", JOptionPane.YES_OPTION);
-        if (resp == JOptionPane.YES_OPTION) {
-            usu.setDoc(doc);
-            usu.eliminarUsuario();
-        }
-    }
-
+    
 }

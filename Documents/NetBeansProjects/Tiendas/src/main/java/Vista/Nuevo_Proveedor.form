@@ -74,7 +74,7 @@
                               <Component id="lblDocuPro" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="txtDocPro" max="32767" attributes="0"/>
+                          <Component id="txtDocProv" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" pref="9" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblDocuPro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDocPro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDocProv" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -238,9 +238,9 @@
             <Property name="text" type="java.lang.String" value="Documento"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDocPro">
+        <Component class="javax.swing.JTextField" name="txtDocProv">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDocProActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDocProvActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblnomPro">
@@ -414,13 +414,7 @@
               <Color blue="99" green="0" red="99" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Seleccione..."/>
-                <StringItem index="1" value="Cedula de Ciudadania"/>
-                <StringItem index="2" value="Cedula de Extranjeria"/>
-                <StringItem index="3" value="Pasaporte"/>
-                <StringItem index="4" value="Nit"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -447,12 +441,7 @@
               <Color blue="99" green="0" red="99" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Seleccione..."/>
-                <StringItem index="1" value="Persona Natural"/>
-                <StringItem index="2" value="Persona Juridica"/>
-                <StringItem index="3" value=" "/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>

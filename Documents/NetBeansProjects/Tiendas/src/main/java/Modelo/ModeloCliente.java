@@ -5,6 +5,7 @@
 package Modelo;
 
 import Controlador.Conexion;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.Date;
@@ -134,8 +135,8 @@ public class ModeloCliente {
             ps.setString(4, getTel());
             ps.setDate(5, getFe());
             ps.setInt(6, getSex());
-            ps.setString(9, getCor());
-            ps.setString(10, getDir());
+            ps.setString(7, getCor());
+            ps.setString(8, getDir());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Almacenado");
             cn.close();
@@ -154,6 +155,9 @@ public class ModeloCliente {
             }
             if (control instanceof JComboBox) {
                 ((JComboBox) control).setSelectedItem("Seleccione...");
+            }
+             if (control instanceof JDateChooser) {
+                ((JDateChooser) control).setDate(null);
             }
         }
 
@@ -227,7 +231,7 @@ public class ModeloCliente {
         tabla.setModel(tablaCliente);
         //Darle tamaño a cada columna
         int numColumnas = tabla.getColumnCount();
-        int[] tamanos = {150, 150, 150, 150, 100, 100, 200, 130};
+        int[] tamanos = {150, 100, 200, 150, 80, 100, 180, 130};
 
         if (nomPesta.equals("cliente")) {
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
@@ -254,8 +258,8 @@ public class ModeloCliente {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                setTip(rs.getInt(1));
-                setCed(rs.getInt(2));
+                setTip(rs.getInt(2));
+                setCed(rs.getInt(1));
                 setNom(rs.getString(3));
                 setTel(rs.getString(4));
                 setFe(rs.getDate(5));
@@ -281,19 +285,18 @@ public class ModeloCliente {
         Conexion con = new Conexion();
         Connection cn = con.iniciarConexion();
 
-        String actCliente = "call cliente_act(?,?,?,?,?,?,?,?,?)";
+        String actCliente = "call cliente_act(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = cn.prepareStatement(actCliente);
-            ps.setInt(1, getTip());
-            ps.setInt(2, getCed());
-            ps.setString(3, getNom());
-            ps.setString(4, getTel());
-            ps.setDate(5, getFe());
-            ps.setInt(6, getSex());
-            ps.setString(7, getCor());
-            ps.setString(8, getDir());
+            ps.setInt(1, getCed());
+            ps.setString(2, getNom());
+            ps.setString(3, getTel());
+            ps.setDate(4, getFe());
+            ps.setInt(5, getSex());
+            ps.setString(6, getCor());
+            ps.setString(7, getDir());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro Almacenado");
+            JOptionPane.showMessageDialog(null, "Registro Actualizado");
             cn.close();
         } catch (SQLException e) {
             e.printStackTrace();
