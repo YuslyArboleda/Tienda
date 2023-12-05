@@ -10,6 +10,7 @@ import Modelo.ModeloProveedor;
 import Modelo.ModeloUsuario;
 import Vista.Buscar;
 import Vista.DetalleFactura;
+import Vista.Ver_Detalle;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,10 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,10 +37,13 @@ public class ControladorFactura implements ActionListener, DocumentListener {
     ModeloFactura modFac = new ModeloFactura();
     DetalleFactura det = new DetalleFactura();
     ModeloProducto modProd = new ModeloProducto();
+    Ver_Detalle ver = new Ver_Detalle();
 
     public ControladorFactura() {
         bus.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         det.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         det.getBtnFacPro().addActionListener(this);
         det.getBtnProducto().addActionListener(this);
 
@@ -61,6 +63,14 @@ public class ControladorFactura implements ActionListener, DocumentListener {
 
         });
         det.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                ControladorPrincipal contPrin = new ControladorPrincipal();
+                contPrin.iniciar(4);
+            }
+
+        });
+        ver.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 ControladorPrincipal contPrin = new ControladorPrincipal();
@@ -101,62 +111,94 @@ public class ControladorFactura implements ActionListener, DocumentListener {
                         }
                         bus.setVisible(false);
                     }
-
                 }
-
             }
         });
     }
 
     public void detalle_factura(int fact) {
-
-        det.getTxtFactDeta().setText(String.valueOf(fact));
+        det.getLblFactDeta().setText(String.valueOf(fact));
+//        det.getTxtFactDeta().setText(String.valueOf(fact));
         det.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         det.setLocationRelativeTo(null);
         det.setVisible(true);
+    }
+
+//    public void ver_Factura(int fact) {
+////        String dato[]= modFac.buscarFacturaDetalle(fact,ver.getJtDetalle_Fact());
+//        ver.getDet_Fac().setText(String.valueOf(fact));
+//        ver.getDet_Prov().setText(dato[1]);
+//        ver.getDet_Usu().setText(dato[2]);
+//        ver.getDet_Tipo_pago().setText(dato[3]);
+//        ver.getDet_Compro().setText(dato[4]);
+//        ver.getDet_Fec().setText(dato[5]);
+//        ver.getDet_Imp().setText(dato[6]);
+//        ver.getDet_total().setText(dato[7]);
+//        ver.setLocationRelativeTo(bus);
+//        ver.setVisible(true);
+//    }
+    private void gestionarDetalle() {
+        det.getJtDetalleFac().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = bus.getJtBuscar().rowAtPoint(e.getPoint());
+                int columna = bus.getJtBuscar().columnAtPoint(e.getPoint());
+                int co=(Integer.parseInt(bus.getJtBuscar().getValueAt(fila, 0).toString()));
+                System.out.println(fila);
+            }
+
+        });
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(det.getBtnFacPro())) {
-            int fac = Integer.parseInt(det.getTxtFactDeta().getText());
             JButton agr = new JButton("Añadir");
             agr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir-a-la-cesta.png")));
             agr.setBounds(926, 20, 110, 23);
+            bus.getJpPro().add(agr);
 
             bus.getLblbuscar().setText("Producto");
             bus.setLocationRelativeTo(null);
-            bus.getJpPro().add(agr);
             bus.setVisible(true);
             modProd.mostrarTablaProducto(bus.getJtBuscar(), "", "factura");
             agr.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    modFac.agregarDatos(bus.getJtBuscar(), det.getJtDetalleFac(), fac);
+                    modFac.agregarDatos(bus.getJtBuscar(), det.getJtDetalleFac());
+                    
                     bus.setVisible(false);
-
+                    gestionarDetalle();
                 }
+
             });
         }
         if (e.getSource().equals(det.getBtnProducto())) {
 
-            JTable tabla = det.getJtDetalleFac();
-//            if(tabla.getValueAt(0, 0))
-            for (int i = 0; i < tabla.getRowCount(); i++) {
-
-                modFac.setFac(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                modFac.setProd(Integer.parseInt(tabla.getValueAt(i, 1).toString()));
-                if (tabla.getValueAt(i, 4).toString() != null) {
-                    modFac.setCan(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese Cantidad");
-                }
-                if (tabla.getValueAt(i, 4).toString() != null) {
-                    modFac.setValor(Float.parseFloat(tabla.getValueAt(i, 5).toString()));
-                }
-
-            }
+//            JTable tabla = det.getJtDetalleFac();
+//            tabla.clearSelection();
+//            if (modFac.validarTabla(tabla)) {
+//                try {
+//                    for (int i = 0; i < tabla.getRowCount(); i++) {
+//                        modFac.setFac(Integer.parseInt(det.getTxtFactDeta().getText()));
+//                        modFac.setProd(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+//                        modFac.setCan(Integer.parseInt(tabla.getValueAt(i, 3).toString()));
+//                        modFac.setValor(Float.parseFloat(tabla.getValueAt(i, 4).toString()));
+//
+//                        modFac.insertDetalleFactura();
+//                    }
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                } finally {
+//
+//                    det.dispose();
+//                    JOptionPane.showMessageDialog(null, "Registro Almacenado");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Existen campos vacios");
+//            }
+//                
         }
     }
 

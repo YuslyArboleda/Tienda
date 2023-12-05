@@ -55,6 +55,14 @@ public class Buscar extends javax.swing.JFrame {
     public void setLblbuscar(JLabel lblbuscar) {
         this.lblbuscar = lblbuscar;
     }
+
+    public JPanel getJpPro() {
+        return jpPro;
+    }
+
+    public void setJpPro(JPanel jpPro) {
+        this.jpPro = jpPro;
+    }
     
     
 
@@ -68,8 +76,10 @@ public class Buscar extends javax.swing.JFrame {
     private void initComponents() {
 
         jpUsuario = new javax.swing.JPanel();
-        txtBuscar = new javax.swing.JTextField();
+        jpPro = new javax.swing.JPanel();
         lblbuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtBuscar = new javax.swing.JTable();
 
@@ -77,14 +87,40 @@ public class Buscar extends javax.swing.JFrame {
 
         jpUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(153, 0, 153))); // NOI18N
 
-        txtBuscar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtBuscar.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.borderColor"));
-        txtBuscar.setText("Buscar");
+        jpPro.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblbuscar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         lblbuscar.setForeground(new java.awt.Color(153, 0, 153));
         lblbuscar.setText("Buscar");
 
+        txtBuscar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtBuscar.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.borderColor"));
+        txtBuscar.setText("Buscar");
+
+        javax.swing.GroupLayout jpProLayout = new javax.swing.GroupLayout(jpPro);
+        jpPro.setLayout(jpProLayout);
+        jpProLayout.setHorizontalGroup(
+            jpProLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpProLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(551, Short.MAX_VALUE))
+        );
+        jpProLayout.setVerticalGroup(
+            jpProLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jpProLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblbuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jtBuscar.setBackground(new java.awt.Color(242, 242, 242));
         jtBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -98,29 +134,40 @@ public class Buscar extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtBuscar);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jpUsuarioLayout = new javax.swing.GroupLayout(jpUsuario);
         jpUsuario.setLayout(jpUsuarioLayout);
         jpUsuarioLayout.setHorizontalGroup(
             jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpUsuarioLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpUsuarioLayout.createSequentialGroup()
-                        .addComponent(lblbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jpUsuarioLayout.setVerticalGroup(
             jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpUsuarioLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jpPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblbuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -150,7 +197,9 @@ public class Buscar extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jpPro;
     private javax.swing.JPanel jpUsuario;
     private javax.swing.JTable jtBuscar;
     private javax.swing.JLabel lblbuscar;

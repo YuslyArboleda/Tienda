@@ -5,13 +5,15 @@ import Modelo.ModeloFactura;
 import Modelo.ModeloProducto;
 import Modelo.ModeloProveedor;
 import Modelo.ModeloUsuario;
-import Vista.DetalleFactura;
 import Vista.Principal;
+import Vista.Ver_Detalle;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,16 +32,15 @@ import javax.swing.event.DocumentListener;
 public class ControladorPrincipal implements ActionListener, ChangeListener, DocumentListener {
 
     Principal prin = new Principal();//Instancia(Llama) la ventana principal
+    Ver_Detalle ver = new Ver_Detalle();
 //    Nuevo_Usuario nuevo = new Nuevo_Usuario();//Instanca (Llama) la ventana(vista) Nuevo usuario
     ControladorUsuario contUsua = new ControladorUsuario();
     ControladorCliente contCli = new ControladorCliente();
     ControladorProveedor contProv = new ControladorProveedor();
     ControladorFactura contFac = new ControladorFactura();
 
-    ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
-    ModeloProveedor modProv = new ModeloProveedor();
-    ModeloCliente modCli = new ModeloCliente();
-    ModeloProducto modProd = new ModeloProducto();
+    
+    
     ModeloFactura modFact = new ModeloFactura();
 
     public ControladorPrincipal() {
@@ -52,6 +53,13 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         prin.getBtnFactProv().addActionListener(this);
         prin.getBtnGuardarFactura().addActionListener(this);
         prin.getFac_Limpiar().addActionListener(this);
+        ver.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                iniciar(4);
+            }
+
+        });
 
         prin.getJtPrincipal().addChangeListener(this);
 
@@ -104,6 +112,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionProducto() {
+        ModeloProducto modProd = new ModeloProducto();
         modProd.mostrarTablaProducto(prin.getTbProducto(), "", "producto");
         prin.getTxtBuscarProd().addMouseListener(new MouseAdapter() {
             @Override
@@ -165,6 +174,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionUsuario() {
+        ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
 
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), "", "usuario");
 
@@ -197,6 +207,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionCliente() {
+        ModeloCliente modCli = new ModeloCliente();
         modCli.mostrarTablaCliente(prin.getTbCliente(), "", "cliente");
         prin.getTxtBuscarCli().addMouseListener(new MouseAdapter() {
             @Override
@@ -224,6 +235,8 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionProveedor() {
+        ModeloProveedor modProv = new ModeloProveedor();
+        ModeloProducto modProd = new ModeloProducto();
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), "", "proveedor");
         prin.getTxtBuscarProv().addMouseListener(new MouseAdapter() {
             @Override
@@ -252,7 +265,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionFactura() {
-        modFact.mostrarTablaFactura(prin.getTbFactura(), "");
+        modFact.mostrarTablaFactura(prin.getTbFactura(), "",false);
         prin.getTbFactura().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -262,16 +275,19 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                 if (col == 8) {
                     prin.setVisible(false);
                     contFac.detalle_factura(modFact.getFac());
-                    
+                }
+                if (col == 7) {
+//                    contFac.ver_Factura(modFact.getFac());
+
                 }
             }
 
         });
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos
+        ModeloProducto modProd = new ModeloProducto();
         if (e.getSource().equals(prin.getBtnNuevo())) {//Se crea al acción cuando le damos clic en el boton nuevo de la vista princial
 
             prin.setVisible(false);
@@ -323,11 +339,11 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
             if (prin.getBtnGuardarFactura().getText().equals("Guardar")) {
                 modFact.insertarFactura();
                 modProd.limpiar(prin.getJpFactura().getComponents());
-                modFact.mostrarTablaFactura(prin.getTbFactura(), "");
+                modFact.mostrarTablaFactura(prin.getTbFactura(), "",false);
             }
 
         }
-        if(e.getSource().equals(prin.getFac_Limpiar())){
+        if (e.getSource().equals(prin.getFac_Limpiar())) {
             prin.getTxtFact_Usu().setText("");
             modFact.limpiar(prin.getJpFactura().getComponents());
         }
@@ -357,6 +373,10 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
     @Override
     public void insertUpdate(DocumentEvent e) {
+        ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
+        ModeloProveedor modProv = new ModeloProveedor();
+        ModeloProducto modProd = new ModeloProducto();
+        ModeloCliente modCli = new ModeloCliente();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
@@ -366,6 +386,10 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
     @Override
     public void removeUpdate(DocumentEvent e) {
+        ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
+        ModeloProveedor modProv = new ModeloProveedor();
+        ModeloProducto modProd = new ModeloProducto();
+        ModeloCliente modCli = new ModeloCliente();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
@@ -374,6 +398,10 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
     @Override
     public void changedUpdate(DocumentEvent e) {
+        ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
+        ModeloProveedor modProv = new ModeloProveedor();
+        ModeloCliente modCli = new ModeloCliente();
+        ModeloProducto modProd = new ModeloProducto();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");

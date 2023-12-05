@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -159,16 +160,18 @@ public class ModeloProducto {
 
         JButton editar = new JButton();
         JButton eliminar = new JButton();
-        JButton agregar = new JButton();
+        JCheckBox agregar = new JCheckBox();
+        JButton agregar1 = new JButton();
+        
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar (3).png")));
-        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
+//        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
 
-        String[] titulo = {"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"};
+//        String[] titulo = {"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"};
+        String[] titulo = nomPesta.equals("producto") ? new String[]{"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"} : new String[]{"Código", "Imagen", "Producto", "Descripción"};
 
         int total = titulo.length;//Para gardar el tamaño del cector titulo original
-//        agregarBoton(nomPesta, titulo, "", "", "");
         if (nomPesta.equals("producto")) {
 
             titulo = Arrays.copyOf(titulo, titulo.length + 2);
@@ -179,8 +182,17 @@ public class ModeloProducto {
             titulo = Arrays.copyOf(titulo, titulo.length + 1);
             titulo[titulo.length - 1] = "";
         }
+
         DefaultTableModel tablaProducto = new DefaultTableModel(null, titulo) {
+
             public boolean isCellEditable(int row, int column) {
+                if (!nomPesta.equals("producto")) {
+                    if (column == 4) {
+                        return true;
+                    }
+
+                }
+
                 return false;
             }
         };
@@ -209,17 +221,23 @@ public class ModeloProducto {
 
                 dato[2] = rs.getString(3);
                 dato[3] = rs.getString(4);
-                dato[4] = rs.getInt(5);
-                dato[5] = rs.getInt(6);
+                Object[] fila;
+                if (nomPesta.equals("producto")) {
+                    dato[4] = rs.getInt(5);
+                    dato[5] = rs.getInt(6);
 
-                Object[] fila = {dato[0], dato[1], dato[2], dato[3], dato[4], dato[5]};
+                    fila = new Object[]{dato[0], dato[1], dato[2], dato[3], dato[4], dato[5]};
+                } else {
+                    fila = new Object[]{dato[0], dato[1], dato[2], dato[3]};
+                }
+
                 if (nomPesta.equals("producto")) {
                     fila = Arrays.copyOf(fila, fila.length + 2);
                     fila[fila.length - 2] = editar;
                     fila[fila.length - 1] = eliminar;
                 } else {
                     fila = Arrays.copyOf(fila, fila.length + 1);
-                    fila[fila.length - 1] = agregar;
+                    fila[fila.length - 1] = false;
                 }
                 tablaProducto.addRow(fila);
             }
@@ -228,15 +246,25 @@ public class ModeloProducto {
             ex.printStackTrace();
         }
         tabla.setModel(tablaProducto);
-        //Darle tamaño a cada columna
         int numColumnas = tabla.getColumnCount();
-        int[] tamanos = {50, 300, 250, 300, 100, 100};
+
+//        Renderizar la columna para que aparezca el checkbox
+        if (!nomPesta.equals("producto")) {
+            int col= numColumnas-1;
+            TableColumn tc = tabla.getColumnModel().getColumn(col);
+            tc.setCellEditor(tabla.getDefaultEditor(Boolean.class));
+            tc.setCellRenderer(tabla.getDefaultRenderer(Boolean.class));
+        }
+        //Darle tamaño a cada columna
+        int[] tamanos;
 
         if (nomPesta.equals("producto")) {
+            tamanos = new int[]{50, 300, 250, 300, 100, 100};
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
             tamanos[tamanos.length - 2] = 15;
             tamanos[tamanos.length - 1] = 15;
         } else {
+            tamanos = new int[]{50, 300, 250, 300};
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 1);
             tamanos[tamanos.length - 1] = 15;
         }
@@ -254,7 +282,7 @@ public class ModeloProducto {
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            
+
             if (rs.next()) {
                 setId(id);
                 setNom(rs.getString(2));
@@ -275,7 +303,7 @@ public class ModeloProducto {
         String actProducto = "call producto_act(?,?,?,?,?)";
         try {
             PreparedStatement ps = cn.prepareStatement(actProducto);
-            ps.setInt(1,getId());
+            ps.setInt(1, getId());
             ps.setString(2, getNom());
             ps.setString(3, getDes());
             ps.setBytes(4, getImagen());
