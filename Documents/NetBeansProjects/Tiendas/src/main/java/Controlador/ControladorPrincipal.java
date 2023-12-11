@@ -280,10 +280,8 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                 if (col == 7) {
                     prin.setVisible(false);
                     contFac.ver_Factura(modFact.getFac());
-
                 }
             }
-
         });
     }
 
