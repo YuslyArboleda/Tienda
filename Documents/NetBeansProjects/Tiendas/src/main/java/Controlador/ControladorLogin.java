@@ -42,14 +42,14 @@ public class ControladorLogin implements ActionListener {
 
     public void validar() {
         modlog.setUsu(log.getTxtUsuario().getText());
-            String pass = new String(log.getJpContra().getPassword());
-            modlog.setContra(pass);
-            if (modlog.validar(modlog.getUsu(), modlog.getContra())) {
-                log.setVisible(false);
-                prin.iniciar(0);
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
-            }
+        String pass = new String(log.getJpContra().getPassword());
+        modlog.setContra(pass);
+        if (modlog.validar(modlog.getUsu(), modlog.getContra())) {
+            log.setVisible(false);
+            prin.iniciar(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+        }
 
     }
 

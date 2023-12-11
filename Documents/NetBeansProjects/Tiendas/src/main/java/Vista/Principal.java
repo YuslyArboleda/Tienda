@@ -313,6 +313,62 @@ public class Principal extends javax.swing.JFrame {
         this.Fac_Limpiar = Fac_Limpiar;
     }
 
+    public JComboBox<String> getVenta_tipo_p() {
+        return Venta_tipo_p;
+    }
+
+    public void setVenta_tipo_p(JComboBox<String> Venta_tipo_p) {
+        this.Venta_tipo_p = Venta_tipo_p;
+    }
+
+    public JButton getBtnAdmin() {
+        return btnAdmin;
+    }
+
+    public void setBtnAdmin(JButton btnAdmin) {
+        this.btnAdmin = btnAdmin;
+    }
+
+    public JButton getBtnGuardarVenta() {
+        return btnGuardarVenta;
+    }
+
+    public void setBtnGuardarVenta(JButton btnGuardarVenta) {
+        this.btnGuardarVenta = btnGuardarVenta;
+    }
+
+    public JButton getBtnVen_Cli() {
+        return btnVen_Cli;
+    }
+
+    public void setBtnVen_Cli(JButton btnVen_Cli) {
+        this.btnVen_Cli = btnVen_Cli;
+    }
+
+    public JTable getTbVenta() {
+        return tbVenta;
+    }
+
+    public void setTbVenta(JTable tbVenta) {
+        this.tbVenta = tbVenta;
+    }
+
+    public JTextField getTxtBuscarVenta() {
+        return txtBuscarVenta;
+    }
+
+    public void setTxtBuscarVenta(JTextField txtBuscarVenta) {
+        this.txtBuscarVenta = txtBuscarVenta;
+    }
+
+    public JTextField getTxtVen_Clie() {
+        return txtVen_Clie;
+    }
+
+    public void setTxtVen_Clie(JTextField txtVen_Clie) {
+        this.txtVen_Clie = txtVen_Clie;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

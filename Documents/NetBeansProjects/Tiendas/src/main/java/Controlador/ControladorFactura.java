@@ -129,19 +129,19 @@ public class ControladorFactura implements ActionListener, DocumentListener {
         det.setVisible(true);
     }
 
-//    public void ver_Factura(int fact) {
-////        String dato[]= modFac.buscarFacturaDetalle(fact,ver.getJtDetalle_Fact());
-//        ver.getDet_Fac().setText(String.valueOf(fact));
-//        ver.getDet_Prov().setText(dato[1]);
-//        ver.getDet_Usu().setText(dato[2]);
-//        ver.getDet_Tipo_pago().setText(dato[3]);
-//        ver.getDet_Compro().setText(dato[4]);
-//        ver.getDet_Fec().setText(dato[5]);
-//        ver.getDet_Imp().setText(dato[6]);
-//        ver.getDet_total().setText(dato[7]);
-//        ver.setLocationRelativeTo(bus);
-//        ver.setVisible(true);
-//    }
+    public void ver_Factura(int fact) {
+        String dato[]= modFac.buscarFacturaDetalle(fact,ver.getJtDetalle_Fact());
+        ver.getDet_Fac().setText(String.valueOf(fact));
+        ver.getDet_Prov().setText(dato[1]);
+        ver.getDet_Usu().setText(dato[2]);
+        ver.getDet_Tipo_pago().setText(dato[3]);
+        ver.getDet_Compro().setText(dato[4]);
+        ver.getDet_Fec().setText(dato[5]);
+        ver.getDet_Imp().setText(dato[6]);
+        ver.getDet_total().setText(dato[7]);
+        ver.setLocationRelativeTo(bus);
+        ver.setVisible(true);
+    }
     private void gestionarDetalle() {
         det.getJtDetalleFac().addMouseListener(new MouseAdapter() {
             @Override

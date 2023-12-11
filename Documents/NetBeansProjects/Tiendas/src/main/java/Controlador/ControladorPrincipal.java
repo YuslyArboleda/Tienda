@@ -278,7 +278,8 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                     contFac.detalle_factura(modFact.getFac());
                 }
                 if (col == 7) {
-//                    contFac.ver_Factura(modFact.getFac());
+                    prin.setVisible(false);
+                    contFac.ver_Factura(modFact.getFac());
 
                 }
             }
@@ -348,6 +349,9 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         if (e.getSource().equals(prin.getFac_Limpiar())) {
             prin.getTxtFact_Usu().setText("");
             modFact.limpiar(prin.getJpFactura().getComponents());
+        }
+        if(e.getSource().equals(prin.getBtnAdmin())){
+            
         }
 
     }

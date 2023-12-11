@@ -335,5 +335,56 @@ public class ModeloFactura {
         }
 
     }
+    public String[] buscarFacturaDetalle(int valor, JTable tabla) {
+        Conexion cone = new Conexion();
+        Connection cn = cone.iniciarConexion();
+        tabla.setDefaultRenderer(Object.class, new GestionCeldas());
+        Object[] titulo = {"COD","Producto", "Descripcion", "Cantidad", "Valor Unitario", "Total"};
+        int tot = titulo.length;
+
+        DefaultTableModel tablaDetalle = new DefaultTableModel(null, titulo) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        //Desactiva las lineas de las celdas
+        tabla.setShowGrid(false);
+        tabla.setBorder(null);
+
+        String sql = "call Factura_detalle_ver(" + valor + ")";
+        String[] dato = null;
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            //Conocer el total de columnas de un registro de la base de datos
+            int total = rs.getMetaData().getColumnCount();
+            dato = new String[total];
+            while (rs.next()) {
+                for (int i = 0; i < total; i++) {
+                    dato[i] = rs.getString(i + 1);
+                }
+                Object[] fila = {dato[8], dato[9], dato[10], dato[11],dato[12],dato[13]};
+                tablaDetalle.addRow(fila);
+            }
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      
+        tabla.setModel(tablaDetalle);
+        //Darle tamaño a cada columna
+        int numColumnas = tabla.getColumnCount();
+        int[] tamanos = {5, 20, 55, 6, 20,40};
+
+        for (int i = 0; i < numColumnas; i++) {
+            TableColumn columna = tabla.getColumnModel().getColumn(i);
+            columna.setPreferredWidth(tamanos[i]);
+        }
+        cone.cerrarConexion();
+        return dato;
+
+    }
+    
 
 }
