@@ -5,6 +5,7 @@
 package Vista;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -51,6 +52,14 @@ public class DetalleFactura extends javax.swing.JFrame {
         return jtDetalleFac;
     }
 
+    public JComboBox<String> getCbTipo() {
+        return cbTipo;
+    }
+
+    public void setCbTipo(JComboBox<String> cbTipo) {
+        this.cbTipo = cbTipo;
+    }
+
     public void setJtDetalleFac(JTable jtDetalleFac) {
         this.jtDetalleFac = jtDetalleFac;
     }
@@ -58,6 +67,22 @@ public class DetalleFactura extends javax.swing.JFrame {
     public JLabel getLblFactDeta() {
         return lblFactDeta;
     }
+
+    public JTextField getTxtComprobante() {
+        return txtComprobante;
+    }
+
+    public void setTxtComprobante(JTextField txtComprobante) {
+        this.txtComprobante = txtComprobante;
+    }
+
+//    public JTextField getTxtProFact() {
+//        return txtProFact;
+//    }
+//
+//    public void setTxtProFact(JTextField txtProFact) {
+//        this.txtProFact = txtProFact;
+//    }
 
     public void setLblFactDeta(JLabel lblFactDeta) {
         this.lblFactDeta = lblFactDeta;
@@ -77,10 +102,13 @@ public class DetalleFactura extends javax.swing.JFrame {
         lblFactProd = new javax.swing.JLabel();
         btnFacPro = new javax.swing.JButton();
         btnProducto = new javax.swing.JButton();
-        txtProFact = new javax.swing.JTextField();
         lblProducto = new javax.swing.JLabel();
         lblFactDeta = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        tipoPago = new javax.swing.JLabel();
+        cbTipo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        txtComprobante = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtDetalleFac = new javax.swing.JTable();
@@ -91,8 +119,12 @@ public class DetalleFactura extends javax.swing.JFrame {
 
         jpAddProducto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar Producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 12), new java.awt.Color(153, 0, 153))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 153));
         jLabel1.setText("Factura");
 
+        lblFactProd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblFactProd.setForeground(new java.awt.Color(153, 0, 153));
         lblFactProd.setText("Producto");
 
         btnFacPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscando.png"))); // NOI18N
@@ -102,66 +134,92 @@ public class DetalleFactura extends javax.swing.JFrame {
         btnProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/disquete.png"))); // NOI18N
         btnProducto.setText("Guardar");
 
-        txtProFact.setEditable(false);
-        txtProFact.setBorder(null);
-
         lblProducto.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblFactDeta.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        tipoPago.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        tipoPago.setForeground(new java.awt.Color(153, 0, 153));
+        tipoPago.setText("Forma de Pago");
+
+        cbTipo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel2.setText("Comprobante");
 
         javax.swing.GroupLayout jpAddProductoLayout = new javax.swing.GroupLayout(jpAddProducto);
         jpAddProducto.setLayout(jpAddProductoLayout);
         jpAddProductoLayout.setHorizontalGroup(
             jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAddProductoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAddProductoLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lblFactDeta, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAddProductoLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(lblProducto))
+                            .addGroup(jpAddProductoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblFactDeta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(lblFactProd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFacPro)
+                                .addGap(38, 38, 38)
+                                .addComponent(tipoPago))))
                     .addGroup(jpAddProductoLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblProducto))
-                    .addComponent(jSeparator2))
-                .addGap(35, 35, 35)
-                .addComponent(lblFactProd)
-                .addGap(18, 18, 18)
-                .addComponent(btnFacPro)
+                        .addGap(64, 64, 64)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnProducto)
                 .addGap(20, 20, 20))
-            .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpAddProductoLayout.createSequentialGroup()
-                    .addGap(181, 181, 181)
-                    .addComponent(txtProFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(606, Short.MAX_VALUE)))
         );
         jpAddProductoLayout.setVerticalGroup(
             jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAddProductoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFacPro)
-                    .addGroup(jpAddProductoLayout.createSequentialGroup()
-                        .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnProducto)
+                .addContainerGap()
+                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtComprobante, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpAddProductoLayout.createSequentialGroup()
+                        .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAddProductoLayout.createSequentialGroup()
+                                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAddProductoLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(tipoPago)
+                                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))
+                                        .addGap(12, 12, 12))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jpAddProductoLayout.createSequentialGroup()
+                                            .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblFactDeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(2, 2, 2)
+                                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jpAddProductoLayout.createSequentialGroup()
+                                            .addGap(1, 1, 1)
+                                            .addComponent(lblFactProd)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAddProductoLayout.createSequentialGroup()
+                                        .addComponent(btnFacPro)
+                                        .addGap(15, 15, 15)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jpAddProductoLayout.createSequentialGroup()
-                                .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(lblFactDeta)
-                                    .addComponent(lblFactProd))
-                                .addGap(6, 6, 6)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(2, 2, 2)
+                                .addGap(8, 8, 8)
+                                .addComponent(btnProducto)
+                                .addGap(2, 2, 2)))
                         .addComponent(lblProducto)))
-                .addContainerGap(13, Short.MAX_VALUE))
-            .addGroup(jpAddProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpAddProductoLayout.createSequentialGroup()
-                    .addGap(3, 3, 3)
-                    .addComponent(txtProFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(55, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -186,7 +244,7 @@ public class DetalleFactura extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -232,7 +290,7 @@ public class DetalleFactura extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,7 +301,9 @@ public class DetalleFactura extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFacPro;
     private javax.swing.JButton btnProducto;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -253,6 +313,7 @@ public class DetalleFactura extends javax.swing.JFrame {
     private javax.swing.JLabel lblFactDeta;
     private javax.swing.JLabel lblFactProd;
     private javax.swing.JLabel lblProducto;
-    private javax.swing.JTextField txtProFact;
+    private javax.swing.JLabel tipoPago;
+    private javax.swing.JTextField txtComprobante;
     // End of variables declaration//GEN-END:variables
 }

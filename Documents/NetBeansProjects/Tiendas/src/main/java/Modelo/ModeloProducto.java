@@ -96,6 +96,7 @@ public class ModeloProducto {
         if (archivos.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             setRuta(archivos.getSelectedFile().getAbsolutePath());
         }
+        System.out.println(getRuta());
     }
 
     public byte[] obtnerImagen(String ruta) {
@@ -160,16 +161,13 @@ public class ModeloProducto {
 
         JButton editar = new JButton();
         JButton eliminar = new JButton();
-        JCheckBox agregar = new JCheckBox();
-        JButton agregar1 = new JButton();
-        
 
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png")));
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar (3).png")));
-//        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar_archivo.png")));
 
-//        String[] titulo = {"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"};
-        String[] titulo = nomPesta.equals("producto") ? new String[]{"Código", "Imagen", "Producto", "Descripción", "Existencia", "Precio"} : new String[]{"Código", "Imagen", "Producto", "Descripción"};
+        String[] titulo = nomPesta.equals("producto") ? new String[]{"Código", "Imagen", "Producto",
+            "Descripción", "Existencia", "Precio"} : new String[]{"Código", "Imagen",
+            "Producto", "Descripción", "Cantidad", "Valor"};
 
         int total = titulo.length;//Para gardar el tamaño del cector titulo original
         if (nomPesta.equals("producto")) {
@@ -187,12 +185,10 @@ public class ModeloProducto {
 
             public boolean isCellEditable(int row, int column) {
                 if (!nomPesta.equals("producto")) {
-                    if (column == 4) {
+                    if (column == 4 || column == 5 || column == 6) {
                         return true;
                     }
-
                 }
-
                 return false;
             }
         };
@@ -221,22 +217,18 @@ public class ModeloProducto {
 
                 dato[2] = rs.getString(3);
                 dato[3] = rs.getString(4);
+                dato[4] = rs.getInt(5);
+                dato[5] = rs.getInt(6);
                 Object[] fila;
-                if (nomPesta.equals("producto")) {
-                    dato[4] = rs.getInt(5);
-                    dato[5] = rs.getInt(6);
 
+                if (nomPesta.equals("producto")) {
                     fila = new Object[]{dato[0], dato[1], dato[2], dato[3], dato[4], dato[5]};
-                } else {
-                    fila = new Object[]{dato[0], dato[1], dato[2], dato[3]};
-                }
-
-                if (nomPesta.equals("producto")) {
                     fila = Arrays.copyOf(fila, fila.length + 2);
                     fila[fila.length - 2] = editar;
                     fila[fila.length - 1] = eliminar;
                 } else {
-                    fila = Arrays.copyOf(fila, fila.length + 1);
+                    fila = new Object[]{dato[0], dato[1], dato[2], dato[3], 0, 0};
+                    fila = Arrays.copyOf(fila, fila.length + 3);
                     fila[fila.length - 1] = false;
                 }
                 tablaProducto.addRow(fila);
@@ -250,21 +242,19 @@ public class ModeloProducto {
 
 //        Renderizar la columna para que aparezca el checkbox
         if (!nomPesta.equals("producto")) {
-            int col= numColumnas-1;
+            int col = numColumnas - 1;
             TableColumn tc = tabla.getColumnModel().getColumn(col);
             tc.setCellEditor(tabla.getDefaultEditor(Boolean.class));
             tc.setCellRenderer(tabla.getDefaultRenderer(Boolean.class));
         }
         //Darle tamaño a cada columna
-        int[] tamanos;
+        int[] tamanos = {50, 300, 250, 300, 100, 100};
 
         if (nomPesta.equals("producto")) {
-            tamanos = new int[]{50, 300, 250, 300, 100, 100};
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 2);
             tamanos[tamanos.length - 2] = 15;
             tamanos[tamanos.length - 1] = 15;
         } else {
-            tamanos = new int[]{50, 300, 250, 300};
             tamanos = Arrays.copyOf(tamanos, tamanos.length + 1);
             tamanos[tamanos.length - 1] = 15;
         }

@@ -18,11 +18,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -30,7 +28,7 @@ import javax.swing.event.DocumentListener;
  *
  * @author HP
  */
-public class ControladorFactura implements ActionListener, DocumentListener {
+public class ControladorVenta implements ActionListener, DocumentListener {
 
     Buscar bus = new Buscar();
     ModeloUsuario modUsu = new ModeloUsuario();
@@ -40,7 +38,7 @@ public class ControladorFactura implements ActionListener, DocumentListener {
     ModeloProducto modProd = new ModeloProducto();
     Ver_Detalle ver = new Ver_Detalle();
 
-    public ControladorFactura() {
+    public ControladorVenta() {
         bus.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         det.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -118,12 +116,8 @@ public class ControladorFactura implements ActionListener, DocumentListener {
     }
 
     public void detalle_factura(int fact) {
-        det.getCbTipo().addItem("Seleccionar");
-        Map<String, Integer> dato = modFac.llenarCombo("tipopa");
-        for (String sexo : dato.keySet()) {
-            det.getCbTipo().addItem(sexo);
-        }
         det.getLblFactDeta().setText(String.valueOf(fact));
+//        det.getTxtFactDeta().setText(String.valueOf(fact));
         det.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         det.setLocationRelativeTo(null);
         det.setVisible(true);
@@ -148,7 +142,8 @@ public class ControladorFactura implements ActionListener, DocumentListener {
             public void mouseClicked(MouseEvent e) {
                 int fila = bus.getJtBuscar().rowAtPoint(e.getPoint());
                 int columna = bus.getJtBuscar().columnAtPoint(e.getPoint());
-                int co = (Integer.parseInt(bus.getJtBuscar().getValueAt(fila, 0).toString()));
+                int co=(Integer.parseInt(bus.getJtBuscar().getValueAt(fila, 0).toString()));
+                System.out.println(fila);
             }
 
         });
@@ -171,6 +166,7 @@ public class ControladorFactura implements ActionListener, DocumentListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     modFac.agregarDatos(bus.getJtBuscar(), det.getJtDetalleFac());
+                    
                     bus.setVisible(false);
                     gestionarDetalle();
                 }
@@ -178,51 +174,49 @@ public class ControladorFactura implements ActionListener, DocumentListener {
             });
         }
         if (e.getSource().equals(det.getBtnProducto())) {
-            JTable tabla = det.getJtDetalleFac();
-            if (det.getTxtComprobante().getText().isEmpty() || det.getCbTipo().getSelectedItem().equals("Seleccionar")) {
-                JOptionPane.showMessageDialog(null, "No Indicó forma de pago o comprobante");
-            } else {
-                try {
-                    for (int i = 0; i < tabla.getRowCount(); i++) {
-                        modFac.setFac(Integer.parseInt(det.getLblFactDeta().getText()));
-                        modFac.setProd(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                        modFac.setCan(Integer.parseInt(tabla.getValueAt(i, 3).toString()));
-                        modFac.setValor(Float.parseFloat(tabla.getValueAt(i, 4).toString()));
-                        modFac.setTipo(det.getCbTipo().getSelectedItem().toString());
-                        modFac.setComp(det.getTxtComprobante().getText());
-                        modFac.insertDetalleFactura();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                } finally {
-                    det.dispose();
-                    JOptionPane.showMessageDialog(null, "Registro Almacenado");
-                }
 
-            }
-
+//            JTable tabla = det.getJtDetalleFac();
+//            tabla.clearSelection();
+//            if (modFac.validarTabla(tabla)) {
+//                try {
+//                    for (int i = 0; i < tabla.getRowCount(); i++) {
+//                        modFac.setFac(Integer.parseInt(det.getTxtFactDeta().getText()));
+//                        modFac.setProd(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+//                        modFac.setCan(Integer.parseInt(tabla.getValueAt(i, 3).toString()));
+//                        modFac.setValor(Float.parseFloat(tabla.getValueAt(i, 4).toString()));
+//
+//                        modFac.insertDetalleFactura();
+//                    }
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                } finally {
+//
+//                    det.dispose();
+//                    JOptionPane.showMessageDialog(null, "Registro Almacenado");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Existen campos vacios");
+//            }
+//                
         }
     }
 
     @Override
-    public void insertUpdate(DocumentEvent e
-    ) {
+    public void insertUpdate(DocumentEvent e) {
         modUsu.mostrarTablaUsuario(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modPro.mostrarTablaProveedor(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modProd.mostrarTablaProducto(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
     }
 
     @Override
-    public void removeUpdate(DocumentEvent e
-    ) {
+    public void removeUpdate(DocumentEvent e) {
         modUsu.mostrarTablaUsuario(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modPro.mostrarTablaProveedor(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modProd.mostrarTablaProducto(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
     }
 
     @Override
-    public void changedUpdate(DocumentEvent e
-    ) {
+    public void changedUpdate(DocumentEvent e) {
         modUsu.mostrarTablaUsuario(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modPro.mostrarTablaProveedor(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");
         modProd.mostrarTablaProducto(bus.getJtBuscar(), bus.getTxtBuscar().getText(), "factura");

@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,7 +26,7 @@ import javax.swing.table.TableColumn;
  *
  * @author HP
  */
-public class ModeloFactura {
+public class ModeloVenta {
 
     private int fac, usu, prov, prod, can;
     private float valor, imp;
@@ -115,27 +113,7 @@ public class ModeloFactura {
         this.prov = prov;
     }
 
-    public ModeloFactura() {
-    }
-
-    public Map<String, Integer> llenarCombo(String valor) {
-        //Llamamos a la clase conexión
-        Conexion conect = new Conexion();
-        Connection cn = conect.iniciarConexion();//Instanciamos la conexion
-        String sql = "Select * from mostrar_" + valor;
-
-        Map<String, Integer> llenar_combo = new HashMap<>();
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                llenar_combo.put(rs.getString(2), rs.getInt(1));
-            }
-            cn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return llenar_combo;
+    public ModeloVenta() {
     }
 
     public void insertarFactura() {
@@ -252,17 +230,12 @@ public class ModeloFactura {
         int c = tabla.getColumnCount() - 1;
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
-
             Boolean selec = (Boolean) tabla.getValueAt(i, c);
-
+            
             if (selec != null && selec) {
-                Object can = tabla.getValueAt(i, 4);
-                Object val = tabla.getValueAt(i, 5);
-                if ((can == null || !can.toString().equals("0"))
-                        && (val == null || !val.toString().equals("0"))) {
-                    return true;
-                }
+                return true;
             }
+
         }
         return false;
     }
@@ -273,8 +246,8 @@ public class ModeloFactura {
         encabezado.setDefaultRenderer(new GestionEncabezado());
         tablaDeta.setTableHeader(encabezado);
         tablaDeta.setDefaultRenderer(Object.class, new GestionCeldas());
-
-        JTextField cantidad = new JTextField();
+        
+        JTextField cantidad= new JTextField();
 
         Object[] titulo = {"Código", "Producto", "Descripción", "Cantidad", "Valor"};
 
@@ -285,26 +258,22 @@ public class ModeloFactura {
         };
         if (seleciono(tablaProd)) {
             for (int i = 0; i < tablaProd.getRowCount(); i++) {
-                Boolean selec = (Boolean) tablaProd.getValueAt(i, tablaProd.getColumnCount() - 1);
+                Boolean selec = (Boolean) tablaProd.getValueAt(i, tablaProd.getColumnCount()-1);
                 if (selec != null && selec) {
                     Object dato[] = new Object[titulo.length];
                     dato[0] = tablaProd.getValueAt(i, 0);
                     dato[1] = tablaProd.getValueAt(i, 2);
                     dato[2] = tablaProd.getValueAt(i, 3);
-                    dato[3] = tablaProd.getValueAt(i, 4);
-                    dato[4] = tablaProd.getValueAt(i, 5);
-
-                    Object fila[] = {dato[0], dato[1], dato[2], dato[3], dato[4]};
+                    Object fila[] = {dato[0], dato[1], dato[2]};
                     tabla_addProducto.addRow(fila);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar "
-                    + "al menos un producto o agregar la cantidad o valor");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un producto");
         }
         tablaDeta.setModel(tabla_addProducto);
-
-        int[] tamanos = {50, 100, 280, 80, 80};
+        
+         int[] tamanos = {50, 100, 280, 80, 80};
         int numColumnas = tablaDeta.getColumnCount();
         for (int i = 0; i < numColumnas; i++) {
             TableColumn columna = tablaDeta.getColumnModel().getColumn(i);
@@ -312,28 +281,6 @@ public class ModeloFactura {
         }
 
     }
-
-    public void insertDetalleFactura() {
-        Conexion conect = new Conexion();
-        Connection cn = conect.iniciarConexion();//Instanciamos la conexion
-
-        String sql = "call detalle_factura_com_ins(?,?,?,?,?,?)";//Consulta a realizar a la base de datos
-        try {
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setInt(1, getFac());
-            ps.setInt(2, getProd());
-            ps.setInt(3, getCan());
-            ps.setFloat(4, getValor());
-            ps.setString(5, getTipo());
-            ps.setString(6, getComp());
-            
-            ps.executeUpdate();
-            cn.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
+    
 
 }

@@ -185,6 +185,7 @@ public class ModeloUsuario {
         }
 
     }
+
     public void mostrarTablaUsuario(JTable tabla, String valor, String nomPesta) {
         Conexion conect = new Conexion();
         Connection cn = conect.iniciarConexion();
@@ -224,16 +225,25 @@ public class ModeloUsuario {
             }
         };
 
-        String sqlUsuario=valor.isEmpty()?" SELECT * FROM mostrar_usuario ":"call usuario_cons('" + valor + "')";
-        
+        String sqlUsuario = valor.isEmpty() ? " SELECT * FROM mostrar_usuario " : "call usuario_cons('" + valor + "')";
+
         try {
             String[] dato = new String[titulo.length];
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sqlUsuario);
             while (rs.next()) {
-                for (int i = 0; i < total; i++) {
-                    dato[i] = rs.getString(i + 1);
-                }
+                dato[0] = rs.getString(1);
+                dato[1] = rs.getString(2);
+                dato[2] = rs.getString(3);
+                dato[6] = rs.getString(4);
+                dato[3] = rs.getString(5);
+                dato[4] = rs.getString(6);
+                dato[5] = rs.getString(7);
+                dato[7] = rs.getString(8);
+                dato[8] = rs.getString(9);
+//                for (int i = 0; i < total; i++) {
+//                    dato[i] = rs.getString(i + 1);
+//                }
                 Object[] fila = {dato[0], dato[1], dato[2], dato[6], dato[3], dato[4], dato[5], dato[7], dato[8]};
                 if (nomPesta.equals("usuario")) {
                     fila = Arrays.copyOf(fila, fila.length + 2);

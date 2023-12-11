@@ -38,8 +38,8 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     ControladorCliente contCli = new ControladorCliente();
     ControladorProveedor contProv = new ControladorProveedor();
     ControladorFactura contFac = new ControladorFactura();
-
     
+     ModeloProducto modProd = new ModeloProducto();   
     
     ModeloFactura modFact = new ModeloFactura();
 
@@ -112,7 +112,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     }
 
     public void gestionProducto() {
-        ModeloProducto modProd = new ModeloProducto();
+        
         modProd.mostrarTablaProducto(prin.getTbProducto(), "", "producto");
         prin.getTxtBuscarProd().addMouseListener(new MouseAdapter() {
             @Override
@@ -134,15 +134,17 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
                     modProd.buscarProducto(modProd.getId());
                     prin.getTxtNomProd().setText(modProd.getNom());
                     prin.getTxaDescPro().setText(modProd.getDes());
-                    File file = new File(modProd.getRuta());
-                    String archivo = file.getName();
-                    prin.getTxtImaPro().setText(archivo);
+                    if(modProd.getRuta()!=null){
+                        File file = new File(modProd.getRuta());
+                        String archivo = file.getName();
+                        prin.getTxtImaPro().setText(archivo);
+                    }
                     prin.getJpNuevoProducto().setBorder(titulo("Actualizar Producto"));
                     prin.getJpNuevoProducto().add(cancelar);
 
                     cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/destellos.png")));
 
-                    cancelar.setBounds(1186, 50, 110, 23);
+                    cancelar.setBounds(1200, 50, 110, 23);
                     prin.getBtnGuardarPro().setText("Actualizar");
 
                     cancelar.addMouseListener(new MouseAdapter() {
@@ -236,7 +238,6 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
     public void gestionProveedor() {
         ModeloProveedor modProv = new ModeloProveedor();
-        ModeloProducto modProd = new ModeloProducto();
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), "", "proveedor");
         prin.getTxtBuscarProv().addMouseListener(new MouseAdapter() {
             @Override
@@ -287,7 +288,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
 
     @Override
     public void actionPerformed(ActionEvent e) { //Valida los eventos
-        ModeloProducto modProd = new ModeloProducto();
+       
         if (e.getSource().equals(prin.getBtnNuevo())) {//Se crea al acción cuando le damos clic en el boton nuevo de la vista princial
 
             prin.setVisible(false);
@@ -310,6 +311,7 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         if (e.getSource().equals(prin.getBtnGuardarPro())) {
             modProd.setNom(prin.getTxtNomProd().getText());
             modProd.setDes(prin.getTxaDescPro().getText());
+            
             modProd.setImagen(modProd.obtnerImagen(modProd.getRuta()));
             if (prin.getBtnGuardarPro().getText().equals("Guardar")) {
                 modProd.insertarProducto();
@@ -375,7 +377,6 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     public void insertUpdate(DocumentEvent e) {
         ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
         ModeloProveedor modProv = new ModeloProveedor();
-        ModeloProducto modProd = new ModeloProducto();
         ModeloCliente modCli = new ModeloCliente();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
@@ -388,7 +389,6 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
     public void removeUpdate(DocumentEvent e) {
         ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
         ModeloProveedor modProv = new ModeloProveedor();
-        ModeloProducto modProd = new ModeloProducto();
         ModeloCliente modCli = new ModeloCliente();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
@@ -401,7 +401,6 @@ public class ControladorPrincipal implements ActionListener, ChangeListener, Doc
         ModeloUsuario modUsu = new ModeloUsuario();//Instancia el modelo de 
         ModeloProveedor modProv = new ModeloProveedor();
         ModeloCliente modCli = new ModeloCliente();
-        ModeloProducto modProd = new ModeloProducto();
         modUsu.mostrarTablaUsuario(prin.getTbUsuario(), prin.getTxtBuscar().getText(), "usuario");
         modProv.mostrarTablaProveedor(prin.getJtProveedor(), prin.getTxtBuscarProv().getText(), "proveedor");
         modCli.mostrarTablaCliente(prin.getTbCliente(), prin.getTxtBuscarCli().getText(), "cliente");
