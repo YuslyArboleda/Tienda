@@ -335,11 +335,12 @@ public class ModeloFactura {
         }
 
     }
-    public String[] buscarFacturaDetalle(int valor, JTable tabla) {
+    public String[] buscarFacturaDetalle(int fact, JTable tabla) {
         Conexion cone = new Conexion();
         Connection cn = cone.iniciarConexion();
         tabla.setDefaultRenderer(Object.class, new GestionCeldas());
-        Object[] titulo = {"COD","Producto", "Descripcion", "Cantidad", "Valor Unitario", "Total"};
+        Object[] titulo = {"COD","Producto", "Descripcion", "Cantidad", "Valor Unitario", 
+            "Total"};
         int tot = titulo.length;
 
         DefaultTableModel tablaDetalle = new DefaultTableModel(null, titulo) {
@@ -351,7 +352,7 @@ public class ModeloFactura {
         tabla.setShowGrid(false);
         tabla.setBorder(null);
 
-        String sql = "call Factura_detalle_ver(" + valor + ")";
+        String sql = "call Factura_detalle_compra_ver(" + fact + ")";
         String[] dato = null;
 
         try {

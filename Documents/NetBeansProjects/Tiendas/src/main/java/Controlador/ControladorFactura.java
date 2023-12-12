@@ -139,16 +139,18 @@ public class ControladorFactura implements ActionListener, DocumentListener {
         ver.getDet_Fec().setText(dato[5]);
         ver.getDet_Imp().setText(dato[6]);
         ver.getDet_total().setText(dato[7]);
-        ver.setLocationRelativeTo(bus);
+        ver.setLocationRelativeTo(null);
         ver.setVisible(true);
     }
     private void gestionarDetalle() {
+        System.out.println("gestion detalle");
         det.getJtDetalleFac().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila = bus.getJtBuscar().rowAtPoint(e.getPoint());
                 int columna = bus.getJtBuscar().columnAtPoint(e.getPoint());
-                int co = (Integer.parseInt(bus.getJtBuscar().getValueAt(fila, 0).toString()));
+                bus.getJtBuscar().setValueAt(" ", fila, 4);
+                bus.getJtBuscar().setValueAt(" ", fila, 5);
             }
 
         });
@@ -158,6 +160,7 @@ public class ControladorFactura implements ActionListener, DocumentListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(det.getBtnFacPro())) {
+            
             JButton agr = new JButton("Añadir");
             agr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir-a-la-cesta.png")));
             agr.setBounds(926, 20, 110, 23);
@@ -166,16 +169,18 @@ public class ControladorFactura implements ActionListener, DocumentListener {
             bus.getLblbuscar().setText("Producto");
             bus.setLocationRelativeTo(null);
             bus.setVisible(true);
+            
             modProd.mostrarTablaProducto(bus.getJtBuscar(), "", "factura");
+            gestionarDetalle();
             agr.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     modFac.agregarDatos(bus.getJtBuscar(), det.getJtDetalleFac());
                     bus.setVisible(false);
-                    gestionarDetalle();
                 }
 
             });
+            
         }
         if (e.getSource().equals(det.getBtnProducto())) {
             JTable tabla = det.getJtDetalleFac();
@@ -198,9 +203,7 @@ public class ControladorFactura implements ActionListener, DocumentListener {
                     det.dispose();
                     JOptionPane.showMessageDialog(null, "Registro Almacenado");
                 }
-
             }
-
         }
     }
 
